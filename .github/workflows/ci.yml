@@ -21,6 +21,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: false
 
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
@@ -55,6 +58,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: false
+
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
 
       - name: Run tests
         env:
