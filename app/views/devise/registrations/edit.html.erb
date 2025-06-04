@@ -1,0 +1,35 @@
+<h2>ユーザ情報編集 <%= resource_name.to_s.humanize %></h2>
+
+<%= form_with model: resource, url: registration_path(resource_name), method: :put, local: true do |f| %>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :username, "ユーザー名 (20文字まで)" %><br />
+    <%= f.text_field :username, autofocus: true, required: true, autocomplete: "username" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メースアドレス" %><br />
+    <%= f.email_field :email, required: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "新しいパスワード (6文字以上)" %><br />
+    <%= f.password_field :password, required: true, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "新しいパスワード (確認用)" %><br />
+    <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, "現在のパスワード (6文字以上)" %><br />
+    <%= f.password_field :current_password, required: true, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "情報の更新" %>
+  </div>
+<% end %>
