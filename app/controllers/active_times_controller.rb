@@ -1,0 +1,2 @@
+class ActiveTimesController < ApplicationController
+end

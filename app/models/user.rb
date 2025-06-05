@@ -16,8 +16,8 @@ class User < ApplicationRecord
     (1..5).each do |dow|
       active_times.create!(
         day_of_week: dow,
-        start_time: "09:00",
-        end_time: "17:00",
+        start_time: "00:00",
+        end_time: "23:59",
         granularity_minutes: 30
       )
     end
