@@ -18,7 +18,7 @@ class ActiveTimesController < ApplicationController
     if @active_time.update(active_time_params)
       redirect_to active_time_path, notice: "活動時間を更新しました"
     else
-      flash.now[ :alert ] = "更新に失敗しました。"
+      flash.now[:alert] = "更新に失敗しました。"
       render :index
     end
   end
@@ -28,7 +28,7 @@ class ActiveTimesController < ApplicationController
   end
 
   def ensure_owner
-    redirect_to root_path, alert: 'アクセスできません' unless @active_time.user == current_user
+    redirect_to root_path, alert: "アクセスできません" unless @active_time.user == current_user
   end
 
   def active_time_params
