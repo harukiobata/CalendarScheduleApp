@@ -1,7 +1,7 @@
 class ActiveTime < ApplicationRecord
   belongs_to :user
 
-  validates :granularity_minutes, inclusion: { in: [15, 30, 45, 60] }
+  validates :granularity_minutes, inclusion: { in: [ 15, 30, 45, 60 ] }
   validate :start_time_before_end_time
 
   private

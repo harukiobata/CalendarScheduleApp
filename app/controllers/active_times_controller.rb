@@ -2,7 +2,7 @@ class ActiveTimesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_active_time, only: [ :update ]
   before_action :ensure_owner, only: [ :update ]
-  before_action :set_active_times, only: [:index, :update]
+  before_action :set_active_times, only: [ :index, :update ]
 
   def index
     if params[:edit_id].present?
