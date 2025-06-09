@@ -36,5 +36,10 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
       expect(user.errors[:password_confirmation]).to include('とパスワードの入力が一致しません')
     end
+
+    it "ユーザー作成時に7件の活動時間が自動生成される" do
+      user = create(:user)
+      expect(user.active_times.count).to eq(7)
+    end
   end
 end
