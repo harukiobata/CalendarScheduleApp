@@ -6,7 +6,7 @@
         <li class="ActiveTime__item">
           <% is_editing =  @editing_active_time&.id == active_time.id %>
           <% icon = is_editing ? "▶︎" : "・" %>
-          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')}", active_times_path(edit_id: active_time.id), class: "ActiveTime__link" %>
+          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')} （#{active_time.granularity_minutes}分）", active_times_path(edit_id: active_time.id), class: "ActiveTime__link" %>
         </li>
       <% end %>
     </ul>
@@ -33,7 +33,7 @@
 
         <div class="ActiveTime__form-group">
           <%= f.label :granularity_minutes, "表示時間の間隔(分)" %>
-          <%= f.number_field :granularity_minutes %>
+          <%= f.select :granularity_minutes, options_for_select([[15, "15分"], [30, "30分"], [45, "45分"], [60, "60分"]],  f.object.granularity_minutes), {}, { required: true } %>
         </div>
 
         <div class="ActiveTime__submit">
