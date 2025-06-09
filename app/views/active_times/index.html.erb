@@ -24,6 +24,11 @@
         <div class="ActiveTime__form-group">
           <%= f.label :start_time, '開始時間' %>
           <%= f.time_field :start_time %>
+          <% if @editing_active_time.errors[:start_time].any? %>
+            <div class="ActiveTime__error-message">
+              <%= @editing_active_time.errors[:start_time].join(", ") %>
+            </div>
+          <% end %>
         </div>
 
         <div class="ActiveTime__form-group">
