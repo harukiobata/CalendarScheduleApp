@@ -9,6 +9,16 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to be_valid
     end
 
+    it "開始時間がnuilだと無効" do
+      active_time = build(:active_time, start_time: nil)
+      expect(active_time).to_not be_valid
+    end
+
+    it "終了時間がnilだと無効" do
+      active_time = build(:active_time, end_time: nil)
+      expect(active_time).to_not be_valid
+    end
+
     it "開始時間が終了時間より後の場合なら無効" do
       active_time = build(:active_time, user: user, start_time: "10:00", end_time: "09:00")
       expect(active_time).to_not be_valid
@@ -22,7 +32,7 @@ RSpec.describe ActiveTime, type: :model do
 
     it "ユーザーに属している必要がある" do
       active_time = build(:active_time, user: nil)
-      expect(active_time).not_to be_valid
+      expect(active_time).to_not be_valid
     end
   end
 end
