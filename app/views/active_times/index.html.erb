@@ -23,7 +23,7 @@
       <%= form_with model: @editing_active_time, url: active_time_path(@editing_active_time), method: :patch, local: true, html: { class: "ActiveTime__form" } do |f| %>
         <div class="ActiveTime__form-group">
           <%= f.label :start_time, '開始時間' %>
-          <%= f.time_field :start_time %>
+          <%= f.time_field :start_time, required: true %>
           <% if @editing_active_time.errors[:start_time].any? %>
             <div class="ActiveTime__error-message">
               <%= @editing_active_time.errors[:start_time].join(", ") %>
@@ -33,7 +33,7 @@
 
         <div class="ActiveTime__form-group">
           <%= f.label :end_time, '終了時間' %>
-          <%= f.time_field :end_time %>
+          <%= f.time_field :end_time, required: true %>
         </div>
 
         <div class="ActiveTime__form-group">
