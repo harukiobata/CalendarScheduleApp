@@ -13,7 +13,7 @@ class User < ApplicationRecord
   private
 
   def create_default_active_times
-    (1..5).each do |dow|
+    (0..6).each do |dow|
       active_times.create!(
         day_of_week: dow,
         start_time: "00:00",
