@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users
   resources :active_times, only: [ :index, :update ]
-  resources :events
+  resources :events do
+    collection do
+      get 'new/:date', to: 'events#new', as: 'new_with_date'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
