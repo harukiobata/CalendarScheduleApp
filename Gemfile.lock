@@ -318,6 +318,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_calendar (3.1.0)
+      rails (>= 6.1)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -387,6 +389,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver
+  simple_calendar
   sprockets-rails
   stimulus-rails
   turbo-rails
