@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_09_192103) do
     t.bigint "user_id", null: false
     t.string "title"
     t.text "description"
+    t.date "date"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "color"
