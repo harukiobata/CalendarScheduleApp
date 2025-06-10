@@ -1,0 +1,32 @@
+@import "simple_calendar";
+
+
+.simple-calendar {
+  max-width: 280px;
+  max-height: 280px;
+
+  .day {
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+    font-size: 0.6rem;
+    text-align: center;
+    vertical-align: top;
+    padding: 1px;
+  }
+
+  .today {
+    background-color: #ffeeba;
+    font-weight: bold;
+  }
+
+  .has-events {
+    background-color: #e3f2fd;
+  }
+
+  .prev-month, .next-month {
+    color: #ccc;
+  }
+}
+
+

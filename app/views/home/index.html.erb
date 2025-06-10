@@ -1,1 +1,15 @@
 <h1>test</h1>
+
+<section id="calendar">
+  <%= month_calendar events: @events do |date, events| %>
+    <div>
+      <strong><%= link_to date.day, new_event_path(date: date) %></strong>
+      <% events.each do |event| %>
+        <div style="background-color: <%= event.color %>;">
+          <%= event.title %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
