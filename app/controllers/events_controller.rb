@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.new
+    @event.date = params[:date] if params[:date].present?
   end
 
   def create
