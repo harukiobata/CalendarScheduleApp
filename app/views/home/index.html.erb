@@ -5,11 +5,20 @@
     <div>
       <strong><%= link_to date.day, new_event_path(date: date) %></strong>
       <% events.each do |event| %>
-        <div style="background-color: <%= event.color %>;">
+        <div>
           <%= event.title %>
         </div>
       <% end %>
     </div>
   <% end %>
+</section>
+
+<section>
+  <div class="tab-navigation">
+    <%= link_to "新規作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+    <%= link_to "一覧表示", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+  </div>
+
+    <%= render template: "events/new" %>
 </section>
 
