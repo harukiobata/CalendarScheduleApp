@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :active_times, only: [ :index, :update ]
   resources :events do
     collection do
-      get 'new/:date', to: 'events#new', as: 'new_with_date'
+      get "new/:date", to: "events#new", as: "new_with_date"
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
