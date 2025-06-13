@@ -1,0 +1,16 @@
+<turbo-frame id="event_panel">
+  <h3>予定の詳細</h3>
+
+  <div class="event-details">
+    <p><strong>タイトル:</strong> <%= @event.title %></p>
+    <p><strong>日付:</strong> <%= @event.date.strftime("%Y/%m/%d") %></p>
+    <p><strong>開始時間:</strong> <%= @event.start_time.strftime("%H:%M") %></p>
+    <p><strong>終了時間:</strong> <%= @event.end_time.strftime("%H:%M") %></p>
+    <p><strong>場所:</strong> <%= @event.location %></p>
+    <p><strong>種類:</strong> <%= @event.category %></p>
+    <p><strong>備考:</strong> <%= @event.note %></p>
+  </div>
+
+  <%= link_to "編集", edit_event_path(@event), data: { turbo_frame: "event_panel" }, class: "event-edit-btn" %>
+  <%= link_to "戻る", events_path, data: { turbo_frame: "event_panel" }, class: "event-index-path-btn" %>
+</turbo-frame>
