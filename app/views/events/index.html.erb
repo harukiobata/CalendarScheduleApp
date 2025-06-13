@@ -1,0 +1,35 @@
+<turbo-frame id="event_panel">
+  <h3>予定一覧</h3>
+
+  <div class="events-index">
+    <table class="event-table">
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>日付</th>
+          <th>開始時間</th>
+          <th>終了時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.title %></td>
+            <td><%= event.start_time.strftime("%Y/%m/%d") %></td>
+            <td><%= event.start_time.strftime("%H:%M") %></td>
+            <td><%= event.end_time.strftime("%H:%M") %></td>
+            <td data-controller="dropdown">
+              <button data-action="click->dropdown#toggle" class="event-actions__toggle">︙</button>
+
+              <div data-dropdown-target="menu" class="event-actions">
+                <%= link_to "詳細", event_path(event), data: { turbo_frame: "event_panel" }, class: "event-actions__link" %>
+                <%= link_to "編集", edit_event_path(event), data: { turbo_frame: "event_panel" }, class: "event-actions__link" %>
+                <%= link_to '削除', event_path(event), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "event-actions__link event-actions__link--danger" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</turbo-frame>
