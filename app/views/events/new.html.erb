@@ -1,41 +1,7 @@
 <turbo-frame id="event_panel">
   <h3>新規予定作成</h3>
-
   <%= form_with model: @event, url: events_path, data: { turbo_frame: "event_panel" } do |f| %>
-    <div class="form-group">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :date, "日付", class: "form-label" %>
-      <%= f.date_field :date, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :start_time, "開始時間", class: "form-label" %>
-      <%= f.time_field :start_time, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :end_time, "終了時間", class: "form-label" %>
-      <%= f.time_field :end_time, class: "form-input" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :location, "場所" %>
-      <%= f.text_field :location, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :category, "種類" %>
-      <%= f.select :category, options_for_select([["重要","重要"], ["仕事","仕事"], ["プライベート","プライベート"], ["その他","その他"]]), {}, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :note, "備考" %>
-      <%= f.text_area :note, class: "form-control" %>
-    </div>
+    <%= render "events/form", f: f %>
 
     <div class="form-actions">
       <%= f.submit "作成", class: "btn btn-primary" %>
