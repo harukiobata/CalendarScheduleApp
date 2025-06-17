@@ -1,24 +1,12 @@
 <h1>test</h1>
 
-<section id="calendar">
-  <%= month_calendar events: @events do |date, events| %>
-    <div>
-      <strong><%= link_to date.day, new_event_path(date: date) %></strong>
-      <% events.each do |event| %>
-        <div>
-          <%= event.title %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-</section>
+<%= render "home/calendar", events: @events %>
 
 <section>
   <div class="tab-navigation">
     <%= link_to "新規作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
     <%= link_to "一覧表示", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
   </div>
-
-    <%= render template: "events/new" %>
+  <%= render template: "events/new" %>
 </section>
 
