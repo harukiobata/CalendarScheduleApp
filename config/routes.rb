@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "schedules", to: "schedules#index", as: :schedule
   get "home/index"
   root "home#index"
   devise_for :users
