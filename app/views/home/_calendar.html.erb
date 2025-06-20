@@ -1,7 +1,7 @@
 <turbo-frame id="calendar">
   <%= month_calendar events: events, attribute: :start_time do |date, day_events| %>
     <div>
-      <strong><%= link_to date.day, new_event_path(date: date), data: { turbo_frame: "event_panel" } %></strong>
+      <strong><%= link_to date.day, "#", data: { controller: "calendar-click", action: "click->calendar-click#handleClick", "calendar-click-date-value": date.to_s  } %></strong>
       <% if day_events.any? %>
         <span class="event-icon">📌</span>
       <% end %>
