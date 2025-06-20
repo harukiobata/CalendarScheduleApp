@@ -1,12 +1,23 @@
-<h1>test</h1>
+<h3>test</h3>
 
-<%= render "home/calendar", events: @events %>
+<div class="home-container">
+  <div class="left-panel">
+    <div class="calendar-container">
+      <%= render "home/calendar", events: @events %>
+    </div>
 
-<section>
-  <div class="tab-navigation">
-    <%= link_to "新規作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
-    <%= link_to "一覧表示", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+    <section class="event-section">
+      <div class="tab-navigation">
+        <%= link_to "新規作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+        <%= link_to "一覧表示", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+      </div>
+      <%= render template: "events/new" %>
+    </section>
   </div>
-  <%= render template: "events/new" %>
-</section>
 
+  <div class="right-panel">
+    <div class="home-right-container"> 
+      <%= render partial: "schedules/daily_schedule", locals: { base_date: @base_date, dates: @dates, grouped_events: @grouped_events, date_active_times: @date_active_times } %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<turbo-frame id="daily_schedule">
+  <div class="schedule"> 
+    <h2 class="schedule__title"><%= base_date.strftime("%Y年%m月%d日") %> のスケジュール</h2>
+
+    <% dates.each do |date| %>
+      <% active_time = date_active_times[date] %>
+      <div class="schedule__day">
+        <h3><%= date.strftime("%-m/%-d (%a)") %></h3>
+        <% if active_time.present? %>
+          <p class="schedule__active-time">
+            有効時間帯: <%= active_time.start_time.strftime("%H:%M") %> 〜
+            <%= active_time.end_time.strftime("%H:%M") %>
+          </p>
+        <% end %>
+        <ul class="schedule__event-list">
+          <% grouped_events[date]&.each do |event| %>
+            <li class="schedule__event">
+              <span class="schedule__event-title"><%= event.title %></span>
+              <span class="schedul__event-time"><%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %></span>
+            </li>
+          <% end %>
+          <% if grouped_events[date].blank? %>
+            <li class="schedule__no-event">予定なし</li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>
