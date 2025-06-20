@@ -89,7 +89,7 @@ class EventsController < ApplicationController
       .group_by { |event| event.start_time.to_date }
 
     date_active_times = dates.index_with do |date|
-      current_user.active_times.find_by(wday: date.wday)
+      current_user.active_times.find_by(day_of_week: date.wday)
     end
     {
       base_date: base_date,
