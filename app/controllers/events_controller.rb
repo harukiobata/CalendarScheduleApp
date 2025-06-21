@@ -41,6 +41,7 @@ class EventsController < ApplicationController
     @event.end_time = Time.zone.parse("#{event_params[:date]} #{event_params[:end_time]}")
 
     if @event.update(event_params)
+      @events = current_user.events.order(:start_time)
       render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を更新しました")
     else
       flash.now[:alert] = "予定の更新に失敗しました"
@@ -53,6 +54,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
+    @events = current_user.events.order(:start_time)
     render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を削除しました")
   end
 

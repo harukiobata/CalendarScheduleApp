@@ -1,11 +1,4 @@
 <turbo-frame id="event_panel">
   <h3>予定の編集</h3>
-  <%= form_with model: @event, data: { turbo_frame: "event_panel" } do |f| %>
-    <%= render 'events/form', f: f %>
-
-    <div class="event-edit-submit">
-      <%= f.submit "更新", class: "event-edit-submit-btn" %>
-      <%= link_to "戻る", events_path, data: { turbo_frame: "event_panel" }, class: "event-index-path-btn" %>
-    </div>
-  <% end %>
+  <%= render "events/form", event: @event %>
 </turbo-frame>
