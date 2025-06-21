@@ -6,17 +6,14 @@
         <tr>
           <th>タイトル</th>
           <th>日付</th>
-          <th>開始時間</th>
-          <th>終了時間</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
         <% @events.each do |event| %>
           <tr>
             <td><%= event.title %></td>
-            <td><%= event.date.strftime("%Y/%m/%d") %></td>
-            <td><%= event.start_time.strftime("%H:%M") %></td>
-            <td><%= event.end_time.strftime("%H:%M") %></td>
+            <td><%= link_to event.date.strftime("%Y/%m/%d"), schedule_path(date: event.date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" } %></td>
             <td data-controller="dropdown">
               <button data-action="click->dropdown#toggle" class="event-actions__toggle">︙</button>
               <div data-dropdown-target="menu" class="event-actions">
