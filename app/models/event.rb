@@ -37,7 +37,7 @@ class Event < ApplicationRecord
       (event_start >= at_start) && (event_end <= at_end)
     end
 
-    unless valid 
+    unless valid
       errors.add(:base, "新規予定は活動時間内でなければなりません")
     end
   end
