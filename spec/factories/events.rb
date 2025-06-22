@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :event do
     association :user
-    title { "予定タイトル" }
+    title { "テスト予定" }
     note { "メモ内容" }
     location { "東京" }
     category { "重要" }
