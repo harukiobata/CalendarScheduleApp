@@ -47,9 +47,6 @@ jobs:
       #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable chromium-chromedriver curl libjemalloc2 libvips postgresql-client
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -58,6 +55,15 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: false
+
+      - name: Install system packages including Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg curl libjemalloc2 libvips postgresql-client chromium-chromedriver
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
