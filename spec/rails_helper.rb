@@ -55,11 +55,15 @@ RSpec.configure do |config|
     options = Selenium::WebDriver::Chrome::Options.new(
       args: %w[headless disable-gpu no-sandbox window-size=1400,1400]
     )
-  
+
     if ENV['CI']
+      chrome_bin = `which google-chrome-stable`.strip
+      chrome_bin = `which google-chrome`.strip if chrome_bin.empty?
+      chrome_bin = `which chromium-browser`.strip if chrome_bin.empty?
+      chrome_bin = `which chromium`.strip if chrome_bin.empty?
       options.binary = '/usr/bin/google-chrome'
     end
-  
+
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
 

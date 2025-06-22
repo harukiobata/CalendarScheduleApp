@@ -65,6 +65,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Check Chrome binary path
+        run: |
+          which google-chrome || which google-chrome-stable || which chromium-browser || which chromium || echo "No chrome binary found"
+
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
