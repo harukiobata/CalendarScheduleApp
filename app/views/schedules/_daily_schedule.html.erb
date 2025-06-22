@@ -1,7 +1,10 @@
 <turbo-frame id="daily_schedule">
   <div class="schedule"> 
+    <div class="schedule-nav">
+      <%= link_to "⬅️ 前日", schedule_path(date: base_date - 1), data: { turbo_frame: "daily_schedule", turbo_stream: true }, class: "schedule-nav__button" %>
+      <%= link_to "翌日 ➡️", schedule_path(date: base_date + 1), data: { turbo_frame: "daily_schedule", turbo_stream: true }, class: "schedule-nav__button" %>
+    </div>
     <h2 class="schedule__title"><%= base_date.strftime("%Y年%m月%d日") %> のスケジュール</h2>
-
     <% dates.each do |date| %>
       <% active_time = date_active_times[date] %>
       <div class="schedule__day">
