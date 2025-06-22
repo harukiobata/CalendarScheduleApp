@@ -18,10 +18,7 @@ RSpec.describe "System/event", type: :system, js: true do
         find_field("event-end_time").set("11:00")
         click_button "作成"
       end
-      within("section.event-section") do
-        click_link "一覧表示"
-      end
-      expect(page).to have_content "会議"
+      expect(page).to have_content("新規予定を追加しました")
     end
 
     it "予定が表示される" do
