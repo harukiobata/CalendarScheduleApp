@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "System/event", type: :system, js: true do
   let(:user) { create(:user) }
-  let!(:event) { create(:event, user:user) }
+  let!(:event) { create(:event, user: user) }
 
   before do
     sign_in user
