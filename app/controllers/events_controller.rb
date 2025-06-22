@@ -14,17 +14,14 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-
-    @event.start_time = Time.zone.parse("#{event_params[:date]} #{event_params[:start_time]}")
-    @event.end_time = Time.zone.parse("#{event_params[:date]} #{event_params[:end_time]}")
-
+    parse_and_set_times(@event, event_params)
     if @event.save
       @event = current_user.events.new
       render_schedule_with_flash(event_panel_template: "events/new", event: @event, notice: "新規予定を追加しました")
     else
       flash.now[:alert] = "予定の追加に失敗しました"
       render turbo_stream: [
-        turbo_stream.replace("event_panel", partial: "events/form", locals: { event: @event }),
+        turbo_stream.replace("event_panel", template: "events/new"),
         turbo_stream.replace("flash", partial: "layouts/flash")
        ], status: :unprocessable_entity
     end
@@ -37,16 +34,15 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.start_time = Time.zone.parse("#{event_params[:date]} #{event_params[:start_time]}")
-    @event.end_time = Time.zone.parse("#{event_params[:date]} #{event_params[:end_time]}")
+    parse_and_set_times(@event, event_params)
 
-    if @event.update(event_params)
+    if @event.update(event_params.except(:start_time, :end_time))
       @events = current_user.events.order(:start_time)
       render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を更新しました")
     else
       flash.now[:alert] = "予定の更新に失敗しました"
       render turbo_stream: [
-        turbo_stream.replace("event_panel", partial: "events/form", locals: { event: @event }),
+        turbo_stream.replace("event_panel", template: "events/edit"),
         turbo_stream.replace("flash", partial: "layouts/flash")
       ], status: :unprocessable_entity
     end
@@ -66,6 +62,13 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :note, :date, :start_time, :end_time, :category, :location)
+  end
+
+  def parse_and_set_times(event, params)
+    start_time = Time.zone.parse("#{params[:date]} #{params[:start_time]}")
+    end_time = Time.zone.parse("#{params[:date]} #{params[:end_time]}")
+    event.start_time = start_time
+    event.end_time = end_time
   end
 
   def render_schedule_with_flash(event_panel_template:, event: nil, notice: nil)
