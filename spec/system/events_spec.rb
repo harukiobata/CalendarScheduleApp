@@ -12,7 +12,7 @@ RSpec.describe "System/event", type: :system, js: true do
   describe "new,index,destroy,editのそれぞれのアクションがしっかり動いている" do
     it "新規予定を作成できる" do
       within("turbo-frame#event_panel") do
-        fill_in "event-date", with: Date.current.strftime("%Y-%m-%d")
+      page.execute_script("document.getElementById('event-date').value = '#{Date.current.strftime('%Y-%m-%d')}'")
         fill_in "event-title", with: "会議"
         fill_in "event-start_time", with: "10:00"
         fill_in "event-end_time", with: "11:00"
