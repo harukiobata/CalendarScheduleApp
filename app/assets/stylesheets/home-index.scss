@@ -1,0 +1,13 @@
+.home-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+
+  .left-panel {
+    flex: 0 0 35%;
+  }
+
+  .right-panel {
+    flex: 1;
+  }
+}

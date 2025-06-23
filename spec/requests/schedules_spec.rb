@@ -1,5 +1,6 @@
 require 'rails_helper'
-RSpec.describe "Homes", type: :request do
+
+RSpec.describe "Schedules", type: :request do
   let(:user) { FactoryBot.create(:user) }
 
   before do
@@ -8,7 +9,7 @@ RSpec.describe "Homes", type: :request do
 
   describe "GET /index" do
     it "returns http success" do
-      get "/home/index"
+      get schedule_path, headers: { "ACCEPT" => "text/vnd.turbo-stream.html" }
       expect(response).to have_http_status(:success)
     end
   end

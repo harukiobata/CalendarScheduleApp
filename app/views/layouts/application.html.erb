@@ -18,9 +18,6 @@
   </head>
 
   <body>
-    <% flash.each do |key, message| %>
-      <div class="flash <%= key %>"><%= message %></div>
-    <% end %>
     <header>
       <nav>
         <% if user_signed_in? %>
@@ -36,6 +33,7 @@
         <% end %>
       </nav>
     </header>
+    <%= render "layouts/flash" %>
     <%= yield %>
   </body>
 </html>
