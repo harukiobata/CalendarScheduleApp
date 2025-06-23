@@ -13,10 +13,10 @@ RSpec.describe "System/event", type: :system, js: true do
     it "新規予定を作成できる" do
       within("turbo-frame#event_panel") do
       page.execute_script("document.getElementById('event-date').value = '#{Date.current.strftime('%Y-%m-%d')}'")
-        fill_in "event-title", with: "会議"
-        fill_in "event-start_time", with: "10:00"
-        fill_in "event-end_time", with: "11:00"
-        click_button "作成"
+      fill_in "event-title", with: "会議"
+      fill_in "event-start_time", with: "10:00"
+      fill_in "event-end_time", with: "11:00"
+      click_button "作成"
       end
       expect(page).to have_content("新規予定を追加しました")
     end

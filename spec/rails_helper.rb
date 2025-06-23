@@ -53,7 +53,7 @@ RSpec.configure do |config|
   # config.use_active_record = false
   Capybara.register_driver :selenium_chrome_headless do |app|
     options = Selenium::WebDriver::Chrome::Options.new(
-      args: %w[headless disable-gpu no-sandbox window-size=1400,1400]
+      args: %w[headless disable-gpu no-sandbox window-size=1400,1400 --lang=ja]
     )
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
