@@ -12,10 +12,10 @@ RSpec.describe "System/event", type: :system, js: true do
   describe "new,index,destroy,editのそれぞれのアクションがしっかり動いている" do
     it "新規予定を作成できる" do
       within("turbo-frame#event_panel") do
-        find_field("event-date").set(Date.current.strftime("%Y-%m-%d"))
-        find_field("event-title").set("会議")
-        find_field("event-start_time").set("10:00")
-        find_field("event-end_time").set("11:00")
+        fill_in "event-date", with: Date.current.strftime("%Y-%m-%d")
+        fill_in "event-title", with: "会議"
+        fill_in "event-start_time", with: "10:00"
+        fill_in "event-end_time", with: "11:00"
         click_button "作成"
       end
       expect(page).to have_content("新規予定を追加しました")
@@ -51,7 +51,7 @@ RSpec.describe "System/event", type: :system, js: true do
         find("button.event-actions__toggle").click
         click_link "編集"
       end
-      find_field("event-title").set("編集された予定")
+      fill_in "event-title", with: "編集された予定"
       click_button "更新"
 
       within("turbo-frame#event_panel") do
