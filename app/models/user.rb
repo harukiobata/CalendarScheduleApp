@@ -11,6 +11,13 @@ class User < ApplicationRecord
 
   after_create :create_default_active_times
 
+  def self.guest
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.username = "ゲストユーザー"
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   private
 
   def create_default_active_times
