@@ -1,15 +1,23 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_event, only:  %i[show edit update destroy]
 
 
   def index
-    @events = current_user.events.order(:start_time)
+    if current_user
+      @events = current_user.events.order(:start_time)
+    else
+      @events = Event.none
+    end
   end
 
   def new
-    @event = current_user.events.new
-    @event.date = params[:date] if params[:date].present?
+    if current_user
+      @event = current_user.events.new
+      @event.date = params[:date] if params[:date].present?
+    else
+      @event = Event.new
+    end
   end
 
   def create
