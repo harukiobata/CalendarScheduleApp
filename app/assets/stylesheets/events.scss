@@ -46,6 +46,7 @@
 
 .event-actions--visible {
   display: flex;
+  flex-direction: column;
 }
 
 .event-actions__link {
