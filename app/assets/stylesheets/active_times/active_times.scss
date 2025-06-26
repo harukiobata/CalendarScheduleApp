@@ -1,0 +1,55 @@
+.ActiveTime {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 2rem auto; // 画面中央に寄せる
+  padding: 1rem;
+
+  &__list,
+  &__editor {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+
+  &__list {
+    width: 40%;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+  }
+
+  &__editor {
+    width: 60%;
+    border: 1px solid #e0e0e0;
+  }
+
+  &__heading {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__link {
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: #333;
+
+    &:hover {
+      background-color: #e9ecef;
+    }
+  }
+
+  &__form-group {
+    .form-label {
+      font-weight: 500;
+    }
+  }
+
+  &__submit {
+    margin-top: 1rem;
+  }
+}
