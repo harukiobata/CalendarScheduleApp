@@ -22,7 +22,7 @@ RSpec.describe ActiveTime, type: :model do
     it "開始時間が終了時間より後の場合なら無効" do
       active_time = build(:active_time, user: user, start_time: "10:00", end_time: "09:00")
       expect(active_time).to_not be_valid
-      expect(active_time.errors[:start_time]).to include("開始時間は終了時間より前にしてください")
+      expect(active_time.errors[:start_time]).to include("は終了時間より前にしてください")
     end
 
     it '粒度が不正なら無効' do
