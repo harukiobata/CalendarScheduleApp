@@ -1,24 +1,32 @@
-<h2>ログイン</h2>
+<div class="user-login-container">
+  <h2 class="user-login__title">ログイン</h2>
 
-<%= form_with model: resource, url: session_path(resource_name), local: true do |f| %>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email" %>
-  </div>
+  <%= form_with model: resource, url: session_path(resource_name), local: true, class: "user-login__form" do |f| %>
+    <div class="mb-3">
+      <%= f.label :email, "メールアドレス", class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, required: true, autocomplete: "current-password" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :password, "パスワード", class: "form-label" %>
+      <%= f.password_field :password, required: true, autocomplete: "current-password", class: "form-control" %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <% if devise_mapping.rememberable? %>
+      <div class="form-check mb-3">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <div class="d-grid mt-4">
+      <%= f.submit "ログイン", class: "btn btn-primary" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+  <div class="user-login__register-link mt-3 text-center">
+    アカウントをお持ちでない方は
+    <%= link_to "こちら", new_user_registration_path, class: "user-login__register-link-anchor" %>
   </div>
-<% end %>
+</div>
+

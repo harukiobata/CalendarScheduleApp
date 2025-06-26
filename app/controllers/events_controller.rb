@@ -1,15 +1,23 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_event, only:  %i[show edit update destroy]
 
 
   def index
-    @events = current_user.events.order(:start_time)
+    if current_user
+      @events = current_user.events.order(:start_time)
+    else
+      @events = Event.none
+    end
   end
 
   def new
-    @event = current_user.events.new
-    @event.date = params[:date] if params[:date].present?
+    if current_user
+      @event = current_user.events.new
+      @event.date = params[:date] if params[:date].present?
+    else
+      @event = Event.new
+    end
   end
 
   def create
@@ -22,7 +30,7 @@ class EventsController < ApplicationController
       flash.now[:alert] = "予定の追加に失敗しました"
       render turbo_stream: [
         turbo_stream.replace("event_panel", template: "events/new"),
-        turbo_stream.replace("flash", partial: "layouts/flash")
+        turbo_stream.replace("flash", partial: "shared/flash")
        ], status: :unprocessable_entity
     end
   end
@@ -43,7 +51,7 @@ class EventsController < ApplicationController
       flash.now[:alert] = "予定の更新に失敗しました"
       render turbo_stream: [
         turbo_stream.replace("event_panel", template: "events/edit"),
-        turbo_stream.replace("flash", partial: "layouts/flash")
+        turbo_stream.replace("flash", partial: "shared/flash")
       ], status: :unprocessable_entity
     end
   end
@@ -80,7 +88,7 @@ class EventsController < ApplicationController
     render turbo_stream: [
       turbo_stream.replace("calendar", partial: "home/calendar", locals: { events: current_user.events }),
       turbo_stream.replace("event_panel", template: event_panel_template, locals: event_panel_locals),
-      turbo_stream.replace("flash", partial: "layouts/flash"),
+      turbo_stream.replace("flash", partial: "shared/flash"),
       turbo_stream.replace("daily_schedule", partial: "schedules/daily_schedule", locals: schedule)
     ]
   end
