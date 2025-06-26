@@ -1,12 +1,12 @@
 <div class="ActiveTime">
   <div class="ActiveTime__list">
     <h2 class="ActiveTime__heading">活動時間 一覧</h2>
-    <ul class="ActiveTime__list-items">
+    <ul class="ActiveTime__list-items list-unstyled">
       <% @active_times.each do |active_time| %>
-        <li class="ActiveTime__item">
+        <li class="ActiveTime__item mb-2">
           <% is_editing =  @editing_active_time&.id == active_time.id %>
           <% icon = is_editing ? "▶︎" : "・" %>
-          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')} （#{active_time.granularity_minutes}分）", active_times_path(edit_id: active_time.id), class: "ActiveTime__link" %>
+          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')} （#{active_time.granularity_minutes}分）", active_times_path(edit_id: active_time.id), class: "ActiveTime__link #{'fw-bold text-primary' if is_editing}" %>
         </li>
       <% end %>
     </ul>
@@ -16,37 +16,29 @@
     <% if @editing_active_time %>
       <h2 class="ActiveTime__heading"><%= day_label(@editing_active_time.day_of_week) %> の編集</h2>
 
-      <div class="ActiveTime__graph">
-        <p><%= day_label(@editing_active_time.day_of_week) %> のグラフ</p>
-      </div>
-
       <%= form_with model: @editing_active_time, url: active_time_path(@editing_active_time), method: :patch, local: true, html: { class: "ActiveTime__form" } do |f| %>
-        <div class="ActiveTime__form-group">
-          <%= f.label :start_time, '開始時間' %>
-          <%= f.time_field :start_time, required: true %>
-          <% if @editing_active_time.errors[:start_time].any? %>
-            <div class="ActiveTime__error-message">
-              <%= @editing_active_time.errors[:start_time].join(", ") %>
-            </div>
-          <% end %>
+        <div class="ActiveTime__form-group mb-3">
+          <%= f.label :start_time, '開始時間', class: "form-label" %>
+          <%= f.time_field :start_time, required: true, class: "form-control" %>
+          <%= render 'shared/field_error', resource: @editing_active_time, field_name: :start_time %>
         </div>
 
-        <div class="ActiveTime__form-group">
-          <%= f.label :end_time, '終了時間' %>
-          <%= f.time_field :end_time, required: true %>
+        <div class="ActiveTime__form-group mb-3">
+          <%= f.label :end_time, '終了時間', class: "form-label" %>
+          <%= f.time_field :end_time, required: true, class: "form-control" %>
         </div>
 
-        <div class="ActiveTime__form-group">
-          <%= f.label :granularity_minutes, "表示時間の間隔(分)" %>
-          <%= f.select :granularity_minutes, options_for_select([[15, "15分"], [30, "30分"], [45, "45分"], [60, "60分"]]), {}, { required: true } %>
+        <div class="ActiveTime__form-group mb-3">
+          <%= f.label :granularity_minutes, "表示時間の間隔(分)", class: "form-label" %>
+          <%= f.select :granularity_minutes, options_for_select([[15, "15分"], [30, "30分"], [45, "45分"], [60, "60分"]]), {}, { required: true, class: "form-select" } %>
         </div>
 
-        <div class="ActiveTime__submit">
-          <%= f.submit "設定を更新する" %>
+        <div class="ActiveTime__submit text-end">
+          <%= f.submit "設定を更新する", class: "btn btn-primary" %>
         </div>
       <% end %>
     <% else %>
-        <p>左から曜日を選択してください。</p>
+        <p lcass="text-muted fst-italic">左から曜日を選択してください。</p>
     <% end %>
   </div>
 </div>

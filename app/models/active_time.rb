@@ -11,7 +11,7 @@ class ActiveTime < ApplicationRecord
     return if start_time.blank? || end_time.blank?
 
     if start_time > end_time
-      errors.add(:start_time, "開始時間は終了時間より前にしてください")
+      errors.add(:start_time, "は終了時間より前にしてください")
     end
   end
 end
