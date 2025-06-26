@@ -21,7 +21,7 @@
       <% else %>
         <%= link_to "ログイン", new_user_session_path, class: "app-header__link" %> 
         <%= link_to "新規登録", new_user_registration_path, class: "app-header__link" %>
-        <%= link_to "ゲストログイン", guest_sign_in_path, method: :post, data: { turbo_method: :post }, class: "app-header__link" %>
+        <%= button_to "ゲストログイン", guest_sign_in_path, method: :post, class: "app-header__link btn btn-link" %>
       <% end %>
     </div>
   </nav>

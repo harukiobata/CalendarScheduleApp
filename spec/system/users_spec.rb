@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "ユーザー認証関連", type: :system, js: true do
   let!(:user) { create(:user, email: "taken@example.com") }
+  let!(:guest_user) { create(:guest_user) }
 
   before do
     visit new_user_registration_path
@@ -87,6 +88,31 @@ RSpec.describe "ユーザー認証関連", type: :system, js: true do
       expect(page).to have_content "ユーザー名は20文字以内で入力してください"
       expect(page).to have_content "パスワード（確認用）とパスワードの入力が一致しません"
       expect(page).to have_content "現在のパスワードは不正な値です"
+    end
+  end
+
+  describe "ゲストユーザーについて" do
+    before do
+      visit root_path
+    end
+
+    it "ゲストユーザーとしてログインできる" do
+      click_button "ゲストログイン"
+      expect(page).to have_content "ゲストユーザーとしてログインしました"
+    end
+
+    it "ユーザー設定編集ができない" do
+      click_button "ゲストログイン"
+      find(".app-header__user-btn").click
+      click_link "ユーザー情報編集"
+      expect(page).to have_content "ゲストユーザーは編集,削除ができません"
+    end
+
+    it "アカウント削除ができない" do
+      click_button "ゲストログイン"
+      find(".app-header__user-btn").click
+      click_button "アカウント削除"
+      expect(page).to have_content "ゲストユーザーは編集,削除ができません"
     end
   end
 end
