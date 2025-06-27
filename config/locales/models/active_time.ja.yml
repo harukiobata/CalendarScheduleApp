@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      active_time: "活動時間"
+    attributes:
+      active_time:
+        start_time: "開始時間"
