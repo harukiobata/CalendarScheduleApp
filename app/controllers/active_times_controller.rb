@@ -15,7 +15,7 @@ class ActiveTimesController < ApplicationController
       redirect_to active_time_path, notice: "活動時間を更新しました"
     else
       @editing_active_time = @active_time
-      flash.now[:alert] = "更新に失敗しました。"
+      flash.now[:alert] = "更新に失敗しました"
       render :index, status: :unprocessable_entity
     end
   end
