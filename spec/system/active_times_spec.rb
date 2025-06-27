@@ -14,13 +14,13 @@ RSpec.describe "活動時間について", type: :system do
     expect(page).to have_content "日曜日 の編集"
     expect(page).to have_field("開始時間")
     expect(page).to have_field("終了時間")
-    expect(page).to have_select("表示時間の間隔(分)")
+    expect(page).to have_select("スケジュールの表示時間間隔(分)")
   end
 
   it "編集リンクをクリックし正しい値を入れることで編集できる" do
     click_link "・ 日曜日 00:00 - 23:59 （30分）"
 
-    select "15", from: "表示時間の間隔(分)"
+    select "15", from: "スケジュールの表示時間間隔(分)"
     fill_in "開始時間", with: "08:00"
     fill_in "終了時間", with: "20:00"
     click_button "設定を更新する"
@@ -31,7 +31,7 @@ RSpec.describe "活動時間について", type: :system do
   it "開始時間が終了時間より後だとエラーになる" do
     click_link "・ 日曜日 00:00 - 23:59 （30分）"
 
-    select "15", from: "表示時間の間隔(分)"
+    select "15", from: "スケジュールの表示時間間隔(分)"
     fill_in "開始時間", with: "22:00"
     fill_in "終了時間", with: "08:00"
     click_button "設定を更新する"
