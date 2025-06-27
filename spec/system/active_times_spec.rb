@@ -30,12 +30,12 @@ RSpec.describe "活動時間について", type: :system do
 
   it "開始時間が終了時間より後だとエラーになる" do
     click_link "・ 日曜日 00:00 - 23:59 （30分）"
-  
+
     select "15", from: "表示時間の間隔(分)"
     fill_in "開始時間", with: "22:00"
     fill_in "終了時間", with: "08:00"
     click_button "設定を更新する"
-  
+
     expect(page).to have_content "開始時間は終了時間より前にしてください"
     expect(page).to have_content "更新に失敗しました"
   end
