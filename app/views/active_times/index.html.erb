@@ -6,7 +6,7 @@
         <li class="ActiveTime__item mb-2">
           <% is_editing =  @editing_active_time&.id == active_time.id %>
           <% icon = is_editing ? "▶︎" : "・" %>
-          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')} （#{active_time.granularity_minutes}分）", active_times_path(edit_id: active_time.id), class: "ActiveTime__link #{'fw-bold text-primary' if is_editing}" %>
+          <%= link_to "#{icon} #{day_label(active_time.day_of_week)} #{active_time.start_time.strftime('%H:%M')} - #{active_time.end_time.strftime('%H:%M')}", active_times_path(edit_id: active_time.id), class: "ActiveTime__link #{'fw-bold text-primary' if is_editing}" %>
         </li>
       <% end %>
     </ul>
@@ -26,11 +26,7 @@
         <div class="ActiveTime__form-group mb-3">
           <%= f.label :end_time, '終了時間', class: "form-label" %>
           <%= f.time_field :end_time, required: true, class: "form-control" %>
-        </div>
-
-        <div class="ActiveTime__form-group mb-3">
-          <%= f.label :granularity_minutes, "スケジュールの表示時間間隔(分)", class: "form-label" %>
-          <%= f.select :granularity_minutes, options_for_select([[15, "15分"], [30, "30分"], [45, "45分"], [60, "60分"]]), {}, { required: true, class: "form-select" } %>
+          <%= render 'shared/field_error', resource: @editing_active_time, field_name: :end_time %>
         </div>
 
         <div class="ActiveTime__submit text-end">
@@ -38,7 +34,28 @@
         </div>
       <% end %>
     <% else %>
-        <p class="text-muted fst-italic">左から曜日を選択してください</p>
+      <p class="text-muted fst-italic">左から曜日を選択してください</p>
+    <% end %>
+  </div>
+
+  <!-- グローバル粒度設定フォーム -->
+  <div class="ActiveTime__global-granularity mt-5 pt-4 border-top">
+    <h3 class="ActiveTime__heading">スケジュールの表示粒度（全体設定）</h3>
+    <p class="text-muted small">※ すべての曜日の表示間隔が一括で変更されます</p>
+
+    <%= form_with url: update_granularity_active_times_path, method: :post, local: true do %>
+      <div class="row g-2 align-items-end">
+        <div class="col-auto">
+          <%= label_tag :granularity_minutes, "表示間隔（分）", class: "form-label" %>
+          <%= select_tag :granularity_minutes,
+                options_for_select([[15, "15分"], [30, "30分"], [45, "45分"], [60, "60分"]],
+                  current_user.active_times.first&.granularity_minutes),
+                class: "form-select" %>
+        </div>
+        <div class="col-auto">
+          <%= submit_tag "一括変更", class: "btn btn-secondary" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
