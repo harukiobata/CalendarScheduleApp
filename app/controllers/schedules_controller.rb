@@ -6,7 +6,7 @@ class SchedulesController < ApplicationController
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
           "daily_schedule",
-          partial: "schedules/daily_schedule",
+          template: "schedules/daily_schedule",
           locals: {
             base_date: @base_date,
             dates: @dates,
