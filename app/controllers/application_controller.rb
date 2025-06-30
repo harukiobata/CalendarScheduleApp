@@ -30,10 +30,10 @@ class ApplicationController < ActionController::Base
 
   def fallback_times_hash
     (0..6).map { |dow|
-      [dow, ActiveTime.new(day_of_week: dow,
+      [ dow, ActiveTime.new(day_of_week: dow,
             start_time: Time.zone.parse("00:00"),
             end_time: Time.zone.parse("23:59"),
-            granularity_minutes: 30)]
+            granularity_minutes: 30) ]
     }.to_h
   end
 end
