@@ -2,6 +2,14 @@ require 'rails_helper'
 
 RSpec.describe ActiveTime, type: :model do
   let(:user) { create(:user) }
+  let(:active_time) do
+    FactoryBot.create(:active_time,
+      user: user,
+      start_time: Time.zone.parse("09:00"),
+      end_time: Time.zone.parse("18:00"),
+      granularity_minutes: 30
+    )
+  end
 
   describe "バリデーション" do
     it "有効なデータの時は通る" do
@@ -33,6 +41,32 @@ RSpec.describe ActiveTime, type: :model do
     it "ユーザーに属している必要がある" do
       active_time = build(:active_time, user: nil)
       expect(active_time).to_not be_valid
+    end
+  end
+
+  describe "メソットについて" do
+    it "時間を分に変換できること" do
+      time = Time.zone.parse("13:30")
+      expect(active_time.minutes_since_midnight(time)).to eq(810) # 13*60+30=810
+    end
+
+    it "配列で返して開始終了がペアであること" do
+      blocks = active_time.time_blocks
+      expect(blocks).to be_an(Array)
+      expect(blocks.first.length).to eq(2)
+    end
+
+    it "粒度に応じて正しい数の時間ブロックを返すこと" do
+      expected_count = (24 * 60) / active_time.granularity_minutes
+      expect(active_time.time_blocks.size).to eq(expected_count)
+    end
+
+    it "時間帯がアクティブ時間内ならtrueを返すこと" do
+      expect(active_time.within_time_range?(Time.zone.parse("09:00"), Time.zone.parse("09:30"))).to be true
+    end
+
+    it "時間帯がアクティブ時間外ならfalseを返すこと" do
+      expect(active_time.within_time_range?(Time.zone.parse("08:00"), Time.zone.parse("08:30"))).to be false
     end
   end
 end
