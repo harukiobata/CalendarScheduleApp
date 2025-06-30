@@ -1,0 +1,91 @@
+.schedule-nav {
+  &__date {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #333;
+    min-width: 160px;
+    text-align: center;
+  }
+}
+
+
+.schedule-grid {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+    padding: 1rem 0;
+    padding-right: 1.5rem; 
+  }
+
+  &__day {
+    position: relative;
+    height: 620px;
+    width: 170px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin: 0 2px;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+  }
+
+  &__block {
+    display: block;
+    border-bottom: 1px solid #eee;
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+    color: #333;
+    text-decoration: none;
+  
+    &--active {
+      position: relative;
+      z-index: 1;
+  
+      &:hover {
+        background-color: #eef;
+        cursor: pointer;
+      }
+    }
+  
+    &--inactive {
+      background-color: #ddd;
+    }
+  
+    &--15 { height: 15px; }
+    &--30 { height: 30px; }
+    &--45 { height: 45px; }
+    &--60 { height: 60px; }
+  }
+}
+
+.schedule-scroll-inner {
+  position: relative;
+  height: 1440px;
+
+  &__time-blocks {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    border-top: 1px solid #333;
+  }
+}
+
+.events-layer {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.event-block {
+  position: absolute;
+  width: 100%;
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

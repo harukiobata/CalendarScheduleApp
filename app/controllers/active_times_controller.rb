@@ -20,6 +20,14 @@ class ActiveTimesController < ApplicationController
     end
   end
 
+  def update_granularity
+    new_granularity = params[:granularity_minutes].to_i
+    current_user.active_times.update_all(granularity_minutes: new_granularity)
+    redirect_to active_times_path, notice: "スケジュールの表示間隔（#{new_granularity}分）を全曜日に適用しました"
+  end
+
+  private
+
   def set_active_time
     @active_time = ActiveTime.find(params[:id])
   end

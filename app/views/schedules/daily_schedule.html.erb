@@ -1,0 +1,63 @@
+<turbo-frame id="daily_schedule">
+  <div class="schedule"> 
+    <div class="schedule-nav d-flex align-items-center justify-content-center gap-4 mt-4">
+      <%= link_to schedule_path(date: base_date - 1), data: { turbo_frame: "daily_schedule", turbo_stream: true }, class: "schedule-nav__button btn btn-outline-primary d-flex align-items-center gap-2" do %>
+        <i class="bi bi-chevron-left"></i>
+        <span>前日</span>
+      <% end %>
+
+      <div class="schedule-nav__date">
+        <%= base_date.strftime("%Y年%-m月%-d日 (%a)") %>
+      </div>
+
+      <%= link_to schedule_path(date: base_date + 1), data: { turbo_frame: "daily_schedule", turbo_stream: true }, class: "schedule-nav__button btn btn-outline-primary d-flex align-items-center gap-2" do %>
+        <span>翌日</span>
+        <i class="bi bi-chevron-right"></i>
+      <% end %>
+    </div>
+
+    <div class="schedule-grid__container">
+      <% dates.each do |date| %>
+        <% active_time = date_active_times[date] %>
+        <div class="schedule-grid__day">
+          <h4 class="schedule-grid__date"><%= date.strftime("%-m/%-d (%a)") %></h4>
+
+          <div class="schedule-scroll-inner">
+            <div class="schedule-scroll-inner__time-blocks">
+              <% active_time.time_blocks.each do |block_start, block_end| %>
+                <% start_time_str = block_start.strftime("%H:%M") %>
+                <% end_time_str = block_end.strftime("%H:%M") %>
+                <% enabled = active_time.within_time_range?(block_start, block_end) %>
+
+                <% block_class = "schedule-grid__block--#{active_time.granularity_minutes}" %>
+
+                <% if enabled %>
+                  <%= link_to new_event_path(date: date, start_time: start_time_str, end_time: end_time_str),
+                      class: "schedule-grid__block #{block_class} schedule-grid__block--active",
+                      data: { turbo_frame: "event_panel" } do %>
+                    <span class="schedule-grid__time"><%= start_time_str %></span>
+                  <% end %>
+                <% else %>
+                  <div class="schedule-grid__block <%= block_class %> schedule-grid__block--inactive">
+                    <span class="schedule-grid__time"><%= start_time_str %></span>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="events-layer">
+              <% (grouped_events[date] || []).each do |event| %>
+                <% top = active_time.minutes_since_midnight(event.start_time) %>
+                <% height = ((event.end_time - event.start_time) / 60).to_i %>
+                <div class="event-block" style="top: <%= top %>px; height: <%= height %>px; background-color: <%= category_color(event.category) %>">
+                  <div class="event-title"><%= event.title %></div>
+                  <div class="event-time"><%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %></div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>

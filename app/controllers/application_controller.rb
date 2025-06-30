@@ -19,10 +19,21 @@ class ApplicationController < ActionController::Base
         .order(:start_time)
         .group_by { |event| event.start_time.to_date }
       @active_times = current_user.active_times.index_by(&:day_of_week)
-      @date_active_times = @dates.index_with { |date| @active_times[date.wday] }
     else
       @grouped_events = {}
-      @date_active_times = {}
+      @active_times = fallback_times_hash
     end
+    @date_active_times = @dates.index_with { |date| @active_times[date.wday] }
+  end
+
+  private
+
+  def fallback_times_hash
+    (0..6).map { |dow|
+      [ dow, ActiveTime.new(day_of_week: dow,
+            start_time: Time.zone.parse("00:00"),
+            end_time: Time.zone.parse("23:59"),
+            granularity_minutes: 30) ]
+    }.to_h
   end
 end

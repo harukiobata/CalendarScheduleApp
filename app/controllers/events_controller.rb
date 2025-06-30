@@ -15,6 +15,11 @@ class EventsController < ApplicationController
     if current_user
       @event = current_user.events.new
       @event.date = params[:date] if params[:date].present?
+
+      if params[:start_time].present? && params[:end_time].present?
+        @event.start_time = Time.zone.parse("#{params[:date]} #{params[:start_time]}")
+        @event.end_time   = Time.zone.parse("#{params[:date]} #{params[:end_time]}")
+      end
     else
       @event = Event.new
     end
@@ -89,7 +94,7 @@ class EventsController < ApplicationController
       turbo_stream.replace("calendar", partial: "home/calendar", locals: { events: current_user.events }),
       turbo_stream.replace("event_panel", template: event_panel_template, locals: event_panel_locals),
       turbo_stream.replace("flash", partial: "shared/flash"),
-      turbo_stream.replace("daily_schedule", partial: "schedules/daily_schedule", locals: schedule)
+      turbo_stream.replace("daily_schedule", template: "schedules/daily_schedule", locals: schedule)
     ]
   end
 
