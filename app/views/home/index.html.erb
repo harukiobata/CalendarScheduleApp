@@ -5,11 +5,14 @@
     </div>
 
     <section class="event-section">
-      <div class="tab-navigation">
-        <%= link_to "新規作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
-        <%= link_to "一覧表示", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+      <div class="tab-navigation d-flex gap-2">
+        <%= link_to "作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+        <%= link_to "一覧", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
       </div>
-      <%= render template: "events/new" %>
+
+      <div class="event-form-panel">
+        <%= render template: "events/new" %>
+      </div>
     </section>
   </div>
 
