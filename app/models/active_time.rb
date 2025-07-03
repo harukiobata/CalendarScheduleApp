@@ -3,7 +3,8 @@ class ActiveTime < ApplicationRecord
 
   validates :start_time, :end_time, presence: true
   validates :granularity_minutes, inclusion: { in: [ 15, 30, 45, 60 ] }
-  validate :start_time_before_end_time
+  validate :end_time_before_start_time
+  validate :activetime_time_cannot_be_change_after_event
 
   # ex: 13:30 => 810
   def minutes_since_midnight(time)
@@ -33,11 +34,23 @@ class ActiveTime < ApplicationRecord
 
   private
 
-  def start_time_before_end_time
+  def end_time_before_start_time
     return if start_time.blank? || end_time.blank?
 
-    if start_time > end_time
-      errors.add(:start_time, "は終了時間より前にしてください")
+    if end_time <= start_time
+      errors.add(:end_time, "は開始時間より後にしてください")
+    end
+  end
+
+  def activetime_time_cannot_be_change_after_event
+    overlapping_events = Event.where("EXTRACT(DOW FROM start_time) = ?", day_of_week).where(
+    "start_time < :start OR end_time > :end",
+    start: start_time,
+    end: end_time
+    )
+
+    if overlapping_events.exists?
+      errors.add(:start_time, "又は終了時間は既存のイベントの時間を含むように設定してください")
     end
   end
 end

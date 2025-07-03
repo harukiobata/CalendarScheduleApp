@@ -20,7 +20,7 @@ RSpec.describe Event, type: :model do
     expect(event).to_not  be_valid
   end
 
-  it "開始時間が終了時間よりも後の場合は無効" do
+  it "終了時間が開始時間よりも前の場合は無効" do
     event = build(:event, user: user, start_time: "11:00", end_time: "10:00")
     expect(event).to_not be_valid
   end

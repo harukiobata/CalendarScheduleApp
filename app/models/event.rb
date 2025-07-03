@@ -5,15 +5,15 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validate  :start_after_end, if: -> { start_time.present? && end_time.present? }
+  validate  :end_before_start, if: -> { start_time.present? && end_time.present? }
   validate  :no_time_overlap, if: -> { start_time.present? && end_time.present? }
   validate  :within_active_time, if: -> { start_time.present? && end_time.present? }
 
   private
 
-  def start_after_end
-    if start_time >= end_time
-      errors.add(:start_time, "開始時間は終了時間より前である必要があります")
+  def end_before_start
+    if end_time <= start_time
+      errors.add(:end_time, "は開始時間より後である必要があります")
     end
   end
 
@@ -38,7 +38,7 @@ class Event < ApplicationRecord
     end
 
     unless valid
-      errors.add(:base, "新規予定は活動時間内でなければなりません")
+      errors.add(:start_time, "は活動時間内でなければなりません")
     end
   end
 end

@@ -23,7 +23,7 @@ RSpec.describe "System/event", type: :system, js: true do
 
     it "予定が表示される" do
       within("section.event-section") do
-        click_link "一覧表示"
+        click_link "一覧"
       end
       within("turbo-frame#event_panel") do
         expect(page).to have_content event.title
@@ -32,7 +32,7 @@ RSpec.describe "System/event", type: :system, js: true do
 
     it "予定を削除できる" do
       within("section.event-section") do
-        click_link "一覧表示"
+        click_link "一覧"
       end
       within("turbo-frame#event_panel") do
         find("button.event-actions__toggle").click
@@ -45,7 +45,7 @@ RSpec.describe "System/event", type: :system, js: true do
 
     it "予定を編集できる" do
       within("section.event-section") do
-        click_link "一覧表示"
+        click_link "一覧"
       end
       within("turbo-frame#event_panel") do
         find("button.event-actions__toggle").click

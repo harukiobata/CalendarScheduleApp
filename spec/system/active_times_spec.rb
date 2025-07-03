@@ -33,7 +33,7 @@ RSpec.describe "活動時間について", type: :system do
     fill_in "終了時間", with: "08:00"
     click_button "設定を更新する"
 
-    expect(page).to have_content "開始時間は終了時間より前にしてください"
+    expect(page).to have_content "終了時間は開始時間より後にしてください"
     expect(page).to have_content "更新に失敗しました"
   end
 
