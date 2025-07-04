@@ -1,18 +1,38 @@
-@import "simple_calendar";
-
-
 .simple-calendar {
-  max-width: 280px;
-  max-height: 280px;
+  margin-top: 30px;
+  max-width: 390px;
+  overflow-y: auto;
+  font-size: 0.7rem;
+  margin-bottom: 10px;
 
-  .day {
-    width: 40px;
-    height: 30px;
-    border: 1px solid #ccc;
-    font-size: 0.6rem;
-    text-align: center;
-    vertical-align: top;
-    padding: 1px;
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    thead th {
+      text-align: center;
+      padding: 4px 0;
+      font-weight: bold;
+      font-size: 0.75rem;
+      background-color: #f9f9f9;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tbody td {
+      width: 14.28%;
+      height: 30px;
+      text-align: center;
+      vertical-align: top;
+      padding: 2px;
+      border: 1px solid #ccc;
+      position: relative;
+      background-color: #fff;
+      line-height: 1;
+      overflow: hidden; /* はみ出す要素があれば隠す */
+    }
   }
 
   .today {
@@ -24,7 +44,18 @@
     background-color: #e3f2fd;
   }
 
-  .prev-month, .next-month {
-    color: #ccc;
+  .prev-month,
+  .next-month {
+    color: #666666;
+    background-color: #e0e0e0;
+  }
+
+  .event-icon {
+    font-size: 0.6rem;
+    display: inline-block;
+    margin-left: 2px;
+    vertical-align: middle;
+    color: #0d6efd;
+    line-height: 1;
   }
 }
