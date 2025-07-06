@@ -1,12 +1,12 @@
 <turbo-frame id="event_panel">
-  <h3>予定一覧</h3>
+  <h3 class="event-heading">予定一覧</h3>
   <div class="events-index">
     <table class="event-table">
       <thead>
         <tr>
-          <th>タイトル</th>
-          <th>日付</th>
-          <th>操作</th>
+          <th class="event-table__title-col">タイトル</th>
+          <th class="event-table__date-col">日付</th>
+          <th class="event-table__action-col" aria-label="操作"></th>
         </tr>
       </thead>
       <tbody>
@@ -14,7 +14,7 @@
           <tr>
             <td><%= event.title %></td>
             <td><%= link_to event.date.strftime("%Y/%m/%d"), schedule_path(date: event.date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" } %></td>
-            <td data-controller="dropdown">
+            <td class="event-actions-cell" data-controller="dropdown">
               <button data-action="click->dropdown#toggle" class="event-actions__toggle">︙</button>
               <div data-dropdown-target="menu" class="event-actions">
                 <%= link_to "詳細", event_path(event), data: { turbo_frame: "event_panel" }, class: "event-actions__link" %>

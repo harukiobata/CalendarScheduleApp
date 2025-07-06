@@ -19,6 +19,7 @@ module CalendarscheduleApp
     config.autoload_lib(ignore: %w[assets tasks])
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [ :ja, :en ]
+    Rails.application.config.beginning_of_week = :sunday
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

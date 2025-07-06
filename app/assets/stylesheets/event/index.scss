@@ -8,9 +8,21 @@
   width: 100%;
   border-collapse: collapse;
 
+  &__title-col {
+    width: 62%;
+  }
+
+  &__date-col {
+    width: 30%;
+  }
+
+  &__action-col {
+    width: 8%;
+  }
+
   th, td {
     border: 1px solid #ccc;
-    padding: 0.5rem;
+    padding: 0.5rem 0.2rem;
     text-align: center;
   }
 
@@ -34,8 +46,8 @@
   display: none;
   flex-direction: column;
   position: absolute;
-  top: 1.5rem;
-  left: 0;
+  top: 100%;
+  right: 0;
   background-color: white;
   border: 1px solid #ccc;
   padding: 0.5rem;

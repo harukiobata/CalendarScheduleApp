@@ -28,9 +28,20 @@ RSpec.describe "スケジュールについて", type: :system do
       first(".schedule-grid__block--active", text: "09:00").click
     end
     within "#event_panel" do
+      expect(page).to have_field("event[start_time]", wait: 5)
       expect(find_field("event[start_time]").value).to start_with("09:00")
       expect(find_field("event[end_time]").value).to start_with("09:30")
       expect(find_field("event[date]").value).to eq((Date.current - 2).to_s)
+    end
+  end
+
+  it "カレンダーの日付をクリックするとその日付がbase_dateになる" do
+    target_date = Date.new(2025, 7, 8)
+    within("#calendar") do
+      find("a[data-calendar-click-date-value='#{target_date}']").click
+    end
+    within("#daily_schedule") do
+      expect(page).to have_content("2025年7月8日")
     end
   end
 end

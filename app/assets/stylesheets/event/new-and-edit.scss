@@ -1,0 +1,39 @@
+.tab-link {
+  padding: 0 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: #f1f3f5;
+  color: #495057;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s, border 0.2s;
+
+  &:hover {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-bottom: 2px solid #dee2e6;
+    text-decoration: none;
+  }
+}
+
+.event-form-panel {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: #fff;
+  min-height: 300px;
+  max-width: 390px;
+}
+
+.event-heading {
+  font-size: 1.2rem;
+}
+
+.event-form {
+  label.form-label,
+  input.form-control,
+  select.form-select,
+  textarea.form-control {
+    font-size: 14px;
+  }
+}

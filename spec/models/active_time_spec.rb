@@ -10,6 +10,7 @@ RSpec.describe ActiveTime, type: :model do
       granularity_minutes: 30
     )
   end
+  let!(:event) { create(:event, user: user, start_time: Time.zone.parse("2025-07-10 12:00"), end_time: Time.zone.parse("2025-07-10 13:30")) }
 
   describe "バリデーション" do
     it "有効なデータの時は通る" do
@@ -27,10 +28,10 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to_not be_valid
     end
 
-    it "開始時間が終了時間より後の場合なら無効" do
+    it "終了時間が開始時間より前なら無効" do
       active_time = build(:active_time, user: user, start_time: "10:00", end_time: "09:00")
       expect(active_time).to_not be_valid
-      expect(active_time.errors[:start_time]).to include("は終了時間より前にしてください")
+      expect(active_time.errors[:end_time]).to include("は開始時間より後にしてください")
     end
 
     it '粒度が不正なら無効' do
@@ -38,12 +39,23 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to_not be_valid
     end
 
-    it "ユーザーに属している必要がある" do
-      active_time = build(:active_time, user: nil)
+    it "既にある予定を覆う形の変更は通る" do
+      active_time = build(:active_time, user: user,
+      day_of_week: 4,
+      start_time: Time.zone.parse("11:00"),
+      end_time:   Time.zone.parse("14:00"))
+      expect(active_time).to be_valid
+    end
+
+    it "既にある予定を覆わない形の変更は通らない" do
+      active_time = build(:active_time, user: user,
+      day_of_week: 4,
+      start_time: Time.zone.parse("13:00"),
+      end_time:   Time.zone.parse("14:00"))
       expect(active_time).to_not be_valid
+      expect(active_time.errors[:start_time]).to include("又は終了時間は既存のイベントの時間を含むように設定してください")
     end
   end
-
   describe "メソットについて" do
     it "時間を分に変換できること" do
       time = Time.zone.parse("13:30")

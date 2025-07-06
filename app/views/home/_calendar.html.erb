@@ -1,9 +1,9 @@
 <turbo-frame id="calendar">
-  <%= month_calendar events: events, attribute: :start_time do |date, day_events| %>
+  <%= month_calendar events: events, attribute: :start_time, partial: "simple_calendar/month_calendar" do |date, day_events| %>
     <div>
       <strong><%= link_to date.day, "#", data: { controller: "calendar-click", action: "click->calendar-click#handleClick", "calendar-click-date-value": date.to_s  } %></strong>
       <% if day_events.any? %>
-        <span class="event-icon">📌</span>
+        <span class="event-icon"><i class="bi bi-pin-angle-fill"></i></span>
       <% end %>
     </div>
   <% end %>

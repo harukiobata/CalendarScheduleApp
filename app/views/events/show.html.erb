@@ -1,17 +1,38 @@
 <turbo-frame id="event_panel">
-  <h3>予定の詳細</h3>
+  <div class= "event-details-card">
+    <div class="card-body">
+      <h4 class="card-title text-center event-heading">予定の詳細</h4>
 
-  <div class="event-details">
-    <p><strong>タイトル:</strong> <%= @event.title %></p>
-    <p><strong>日付:</strong> <%= @event.date.strftime("%Y/%m/%d") %></p>
-    <p><strong>開始時間:</strong> <%= @event.start_time.strftime("%H:%M") %></p>
-    <p><strong>終了時間:</strong> <%= @event.end_time.strftime("%H:%M") %></p>
-    <p><strong>場所:</strong> <%= @event.location %></p>
-    <p><strong>種類:</strong> <%= @event.category %></p>
-    <p><strong>備考:</strong> <%= @event.note %></p>
-  </div>
-  <div>
-    <%= link_to "編集", edit_event_path(@event), data: { turbo_frame: "event_panel" }, class: "event-edit-btn" %>
-    <%= link_to "戻る", events_path, data: { turbo_frame: "event_panel" }, class: "event-index-path-btn" %>
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">
+          <strong>タイトル：</strong> <%= @event.title %>
+        </li>
+        <li class="list-group-item">
+          <strong>日付：</strong> <%= @event.date.strftime("%Y/%m/%d") %>
+        </li>
+        <li class="list-group-item">
+          <strong>開始時間：</strong> <%= @event.start_time.strftime("%H:%M") %>
+        </li>
+        <li class="list-group-item">
+          <strong>終了時間：</strong> <%= @event.end_time.strftime("%H:%M") %>
+        </li>
+        <li class="list-group-item">
+          <strong>場所：</strong> <%= @event.location %>
+        </li>
+        <li class="list-group-item">
+          <strong>種類：</strong> <%= @event.category %>
+        </li>
+        <li class="list-group-item">
+          <strong>備考：</strong> <%= @event.note %>
+        </li>
+      </ul>
+
+      <div class="text-center">
+        <%= link_to "編集", edit_event_path(@event), data: { turbo_frame: "event_panel" }, class: "btn btn-primary me-2" %>
+        <%= link_to "戻る", events_path, data: { turbo_frame: "event_panel" }, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
   </div>
 </turbo-frame>
+
+

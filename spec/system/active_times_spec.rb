@@ -33,7 +33,7 @@ RSpec.describe "活動時間について", type: :system do
     fill_in "終了時間", with: "08:00"
     click_button "設定を更新する"
 
-    expect(page).to have_content "開始時間は終了時間より前にしてください"
+    expect(page).to have_content "終了時間は開始時間より後にしてください"
     expect(page).to have_content "更新に失敗しました"
   end
 
@@ -42,5 +42,17 @@ RSpec.describe "活動時間について", type: :system do
     click_button "一括変更"
 
     expect(page).to have_content "スケジュールの表示間隔（15分）を全曜日に適用しました"
+  end
+
+  it "既存イベントを含むような活動時間でなければエラーになる" do
+    create(:event, user: user, date: Date.parse("2025-07-08"), start_time: "2025-07-08 12:00", end_time: "2025-07-08 14:00")
+    click_link "・ 火曜日 00:00 - 23:59"
+
+    fill_in "開始時間", with: "13:00"
+    fill_in "終了時間", with: "14:00"
+    click_button "設定を更新する"
+
+    expect(page).to have_content "開始時間又は終了時間は既存のイベントの時間を含むように設定してください"
+    expect(page).to have_content "更新に失敗しました"
   end
 end
