@@ -43,13 +43,16 @@ class ActiveTime < ApplicationRecord
   end
 
   def activetime_time_cannot_be_change_after_event
-    overlapping_events = Event.where("EXTRACT(DOW FROM start_time) = ?", day_of_week).where(
-    "start_time < :start OR end_time > :end",
-    start: start_time,
-    end: end_time
-    )
+    events_on_same_day = Event.where(user_id: user_id)
+                            .where("EXTRACT(DOW FROM date) = ?", day_of_week)
 
-    if overlapping_events.exists?
+    unless events_on_same_day.all? do |e|
+      active_start = start_time.strftime("%H:%M:%S")
+      active_end   = end_time.strftime("%H:%M:%S")
+      event_start  = e.start_time.strftime("%H:%M:%S")
+      event_end    = e.end_time.strftime("%H:%M:%S")
+      active_start <= event_start && active_end >= event_end
+    end
       errors.add(:start_time, "又は終了時間は既存のイベントの時間を含むように設定してください")
     end
   end

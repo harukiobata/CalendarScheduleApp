@@ -1,7 +1,6 @@
 class ActiveTimesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_active_time, only: [ :update ]
-  before_action :ensure_owner, only: [ :update ]
   before_action :set_active_times, only: [ :index, :update ]
 
   def index
@@ -34,10 +33,6 @@ class ActiveTimesController < ApplicationController
 
   def set_active_times
     @active_times = current_user.active_times.order(:day_of_week)
-  end
-
-  def ensure_owner
-    redirect_to root_path, alert: "アクセスできません" unless @active_time.user == current_user
   end
 
   def active_time_params
