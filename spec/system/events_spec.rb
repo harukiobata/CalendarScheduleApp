@@ -4,7 +4,7 @@ RSpec.describe "System/event", type: :system, js: true do
   # 注意事項
   # turbo FrameとHotwireの関係でcreate,updateに関してはテストコードが異なります。
   # createについて　execute_scriptでdateを入力,あとはfill_in。(fill_inでdateをセットすると正しい値が入らず崩れるため)
-  # updateについて　一度date_strに移してからかつfindでまつ操作が必要。(それがないとdateに正しい値が入らずテストにならないため)他のstart_time,end_timeもfind setで（安定するため)
+  # updateについて　一度date_strに移してからかつfindで待つ操作が必要。(それがないとdateに正しい値が入らずテストにならないため)他のstart_time,end_timeもfind setで（安定するため)
   # update(titleなどdate,datetime型以外) fill_inで問題なし
   # 以上から操作が混在しておりますがturboframe下でのテストを成立させるための工夫です。
 
