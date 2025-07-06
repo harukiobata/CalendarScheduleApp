@@ -8,9 +8,9 @@ RSpec.describe ActiveTime, type: :model do
       start_time: Time.zone.parse("09:00"),
       end_time: Time.zone.parse("18:00"),
       granularity_minutes: 30
-    ) 
+    )
   end
-  let!(:event) {create(:event, user: user, start_time: Time.zone.parse("2025-07-10 12:00"), end_time: Time.zone.parse("2025-07-10 13:30"))}
+  let!(:event) { create(:event, user: user, start_time: Time.zone.parse("2025-07-10 12:00"), end_time: Time.zone.parse("2025-07-10 13:30")) }
 
   describe "バリデーション" do
     it "有効なデータの時は通る" do
@@ -55,7 +55,6 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to_not be_valid
       expect(active_time.errors[:start_time]).to include("又は終了時間は既存のイベントの時間を含むように設定してください")
     end
-
   end
   describe "メソットについて" do
     it "時間を分に変換できること" do
