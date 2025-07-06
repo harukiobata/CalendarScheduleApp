@@ -22,7 +22,7 @@ class Event < ApplicationRecord
 
     if overlapping_events.exists?
       conflict_titles = overlapping_events.pluck(:title).join(", ")
-      errors.add(:base, "次の予定と重なっています: #{conflict_titles}")
+      errors.add(:title, "が重なっています: #{conflict_titles}")
     end
   end
 
