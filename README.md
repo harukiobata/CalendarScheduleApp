@@ -10,6 +10,7 @@
 
 ## 3.サービスのURL
 
+https://my-schedule-app-871b9c9f089c.herokuapp.com/
 
 ## 4.サービスの概要
 
