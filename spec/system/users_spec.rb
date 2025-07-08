@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "ユーザー認証関連", type: :system, js: true do
   let!(:user) { create(:user, email: "taken@example.com") }
-  let!(:guest_user) { create(:guest_user) }
+  let!(:guest_user) { User.guest }
 
   before do
     visit new_user_registration_path
