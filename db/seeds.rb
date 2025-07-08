@@ -40,11 +40,11 @@ Event.create!([
     user: user
   },
   {
-    title: "会議"
-    date: "2025-07-25"
-    start_time: "2025-07-25 10:00"
-    end_time: "2025-07-25 12:00"
-    category: "仕事"
+    title: "会議",
+    date: "2025-07-25",
+    start_time: "2025-07-25 10:00",
+    end_time: "2025-07-25 12:00",
+    category: "仕事",
     user: user
   }
 ])
