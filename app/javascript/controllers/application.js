@@ -1,4 +1,3 @@
-import "@hotwired/turbo-rails"
 import { Application } from "@hotwired/stimulus"
 import dropdownController from "./dropdown_controller"
 import calendarClickController from "./calendar_click_controller"
