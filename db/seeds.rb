@@ -67,7 +67,7 @@ Event.create!([
     title: "散歩",
     date: "2025-08-15",
     start_time: "2025-08-15 6:00",
-    end_time: "2025-07-25 7:30",
+    end_time: "2025-08-15 7:30",
     category: "プライベート",
     user: guest_user
   }
