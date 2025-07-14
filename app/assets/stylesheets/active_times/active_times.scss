@@ -3,7 +3,10 @@
   justify-content: center;
   gap: 2rem;
   max-width: 960px;
-  margin: 2rem auto; // 画面中央に寄せる
+  margin-top: 2rem; 
+  margin-bottom: 280px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1rem;
 
   &__list,
