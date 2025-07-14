@@ -39,7 +39,7 @@ googleカレンダーのスケジュール機能にTimeRexのマス予約機能�
   * 活動時間編集: 曜日ごとに予定を入れられる時間を設定可能
   ![活動時間編集](./public/images/activetime.png)
   * スケジュールの1マスあたりの時間設定: スケジュールで表示させる1マスあたりの時間を(15,30,45,60)の4つから選択可能
-  ![スケジュール時間設定](./public/images/schedule-view.png)
+  ![スケジュール時間設定](./public/images/schedule-.granularity_minutes.png)
 ユーザー認証
   ![ログイン機能](./public/images/login-guestlogin.png)
   * ログイン: 新規登録していただくことであなただけがあなたのデータを確認可能
