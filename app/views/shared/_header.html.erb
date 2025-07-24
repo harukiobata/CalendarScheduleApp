@@ -1,11 +1,15 @@
 <header class="app-header">
-  <nav class="app-header__nav">
+  <nav class="app-header__nav" data-controller="menu">
     <div class="app-header__brand">
       <%= link_to root_path, class: "app-header__logo" do %>
         <i class="bi bi-calendar2-week-fill me-1"></i><span class="app-header__title">MySchedule</span>
       <% end %>
     </div>
-    <div class="app-header__menu">
+    <button class="app-header__toggle d-md-none"
+            data-action="click->menu#toggle">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="app-header__menu" data-menu-target="menu">
       <% if user_signed_in? %>
         <%= link_to "活動時間を設定", active_times_path, class: "app-header__link" %>
         <div data-controller="dropdown" class="dropdown app-header__dropdown">
