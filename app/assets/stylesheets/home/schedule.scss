@@ -1,3 +1,25 @@
+.schedule {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+
+  @media (max-width: 1100px) {
+    width: calc(100% - 60px);
+  }
+  
+  @media (max-width: 1000px) {
+    width: calc(100% - 100px);
+  }
+  
+  @media (max-width: 900px) {
+    width: calc(100% - 140px);
+  }
+
+  @media (max-width: 800px) {
+    width: calc(100% - 160px);
+  }
+}
+
 .schedule-nav {
   &__date {
     font-weight: 700;
@@ -14,7 +36,15 @@
     justify-content: space-between;
     gap: 2px;
     padding: 1rem 0;
-    padding-right: 1.5rem; 
+    padding-right: 1.5rem;
+    overflow-x: auto;
+    min-width: max-content;
+  }
+
+  &__date {
+    @media (max-width: 1000px) and (min-width: 768px) {
+      font-size: 1rem !important;
+    }
   }
 
   &__day {
@@ -26,6 +56,24 @@
     margin: 0 2px;
     border-radius: 8px;
     background-color: #fdfdfd;
+
+    @media (max-width: 1399px) and (min-width: 1200px) {
+      width: calc(
+        150px + (180 - 150) * ((100vw - 1200px) / (1399 - 1200))
+      );
+    }
+
+    @media (max-width: 1200px) and (min-width: 1000px) {
+      width: calc(
+        125px + (150 - 125) * ((100vw - 1000px) / (1200 - 1000))
+      );
+    }
+
+    @media (max-width: 1000px) and (min-width: 768px) {
+      width: calc(
+        100px + (125 - 100) * ((100vw - 768px) / (1000 - 768))
+      );
+    }
   }
 
   &__block {

@@ -5,6 +5,12 @@
   font-size: 0.7rem;
   margin-bottom: 10px;
 
+  @media (min-width: 768px) and (max-width: 1400px) {
+    .simple-calendar {
+      max-width: calc(320px + (90 * ((100vw - 768px) / 632)));
+    }
+  }
+
   table {
     width: 100%;
     table-layout: fixed;
@@ -31,7 +37,7 @@
       position: relative;
       background-color: #fff;
       line-height: 1;
-      overflow: hidden; /* はみ出す要素があれば隠す */
+      overflow: hidden;
     }
   }
 
