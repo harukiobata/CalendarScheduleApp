@@ -36,7 +36,7 @@ RSpec.describe "スケジュールについて", type: :system, js: true do
   end
 
   it "カレンダーの日付をクリックするとその日付がbase_dateになる" do
-    target_date = Date.new(2025, 7, 8)
+    target_date = Time.zone.today.change(day: 8)
     within("#calendar") do
       find("a[data-calendar-click-date-value='#{target_date}']").click
     end
