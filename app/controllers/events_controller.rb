@@ -22,6 +22,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    @start_date = params[:start_date].to_date rescue Time.zone.today
     @event = current_user.events.build(event_params)
     parse_and_set_times(@event, event_params)
     if @event.save
@@ -40,6 +41,7 @@ class EventsController < ApplicationController
 
   def update
     parse_and_set_times(@event, event_params)
+    @start_date = params[:start_date].to_date rescue Time.zone.today
     if @event.update(event_params.except(:start_time, :end_time))
       @events = current_user.events.order(:start_time)
       render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を更新しました")
@@ -50,6 +52,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
+    @start_date = params[:start_date].to_date rescue Time.zone.today
     @events = current_user.events.order(:start_time)
     render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を削除しました")
   end
