@@ -41,7 +41,7 @@ RSpec.describe "スケジュールについて", type: :system, js: true do
       find("a[data-calendar-click-date-value='#{target_date}']").click
     end
     within("#daily_schedule") do
-      expect(page).to have_content("2025年7月8日")
+      expect(page).to have_content(target_date.strftime("%Y年%-m月%-d日"))
     end
   end
 end
