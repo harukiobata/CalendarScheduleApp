@@ -5,9 +5,9 @@
     </time>
 
     <nav class="calendar-nav btn-group">
-      <%= link_to t('simple_calendar.previous', default: '先月'), calendar.url_for_previous_view, class: "btn btn-outline-secondary btn-sm" %>
-      <%= link_to t('simple_calendar.today', default: '今月'), calendar.url_for_today_view, class: "btn btn-outline-primary btn-sm" %>
-      <%= link_to t('simple_calendar.next', default: '来月'), calendar.url_for_next_view, class: "btn btn-outline-secondary btn-sm" %>
+      <%= link_to "先月", root_path(start_date: @start_date.prev_month), data: { turbo_frame: "calendar" }, class: "btn btn-outline-secondary btn-sm" %>
+      <%= link_to "今月", root_path(start_date: Date.today.beginning_of_month), data: { turbo_frame: "calendar" }, class: "btn btn-outline-primary btn-sm" %>
+      <%= link_to "来月", root_path(start_date: @start_date.next_month), data: { turbo_frame: "calendar" }, class: "btn btn-outline-secondary btn-sm" %>
     </nav>
   </div>
 

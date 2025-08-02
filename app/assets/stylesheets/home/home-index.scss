@@ -2,14 +2,115 @@
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  flex-wrap: nowrap;
+  max-width: 100%;
 }
 
 .left-panel {
   flex: 0 0 30%;
   margin-left: 2rem;
+  min-width: 300px;
 }
 
 .right-panel {
   flex: 1;
   margin-right: 1rem;
+}
+
+.right-panel.show {
+  display: block;
+}
+
+.schedule-popup-button {
+  display: none;
+}
+
+@media (max-width: 1400px) {
+  .home-container {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-container {
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-popup-button {
+    display: flex !important;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    z-index: 1000;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .calendar-container {
+    font-size: 0.95rem;
+  }
+
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .left-panel {
+    flex: 1;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 700px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .right-panel {
+    top: 67px !important;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 120vh;
+    margin: 0;
+    z-index: 999;
+    background: white;
+    overflow: auto;
+  }
+
+  .event-section {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-container {
+    font-size: 0.9rem;
+  }
+  
+  .schedule-popup-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 400px) {
+  .calendar-container {
+    font-size: 0.85rem;
+  }
+
+  .schedule-popup-button {
+    width: 40px;
+    height: 40px;
+  }
 }

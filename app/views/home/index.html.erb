@@ -1,7 +1,7 @@
-<div class="home-container">
+<div class="home-container" data-controller="schedule-popup">
   <div class="left-panel">
     <div class="calendar-container">
-      <%= render "home/calendar", events: @events %>
+      <%= render "home/calendar", events: @events, start_date: @start_date %>
     </div>
 
     <section class="event-section">
@@ -16,9 +16,16 @@
     </section>
   </div>
 
-  <div class="right-panel">
+  <div class="right-panel schedule-popup" data-schedule-popup-target="panel">
     <div class="home-right-container"> 
       <%= render template: "schedules/daily_schedule", locals: { base_date: @base_date, dates: @dates, grouped_events: @grouped_events, date_active_times: @date_active_times } %>
     </div>
   </div>
+
+  <button class="schedule-popup-button"
+          aria-label="スケジュール表示"
+          data-action="click->schedule-popup#toggle"
+          data-schedule-popup-target="button">
+    <i class="bi bi-calendar"></i>
+  </button>
 </div>

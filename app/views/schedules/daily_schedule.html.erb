@@ -16,11 +16,16 @@
       <% end %>
     </div>
 
-    <div class="schedule-grid__container">
+    <div class="schedule-grid__container" data-action="click->schedule-popup#closePanel">
       <% dates.each do |date| %>
         <% active_time = date_active_times[date] %>
         <div class="schedule-grid__day">
-          <h4 class="schedule-grid__date"><%= date.strftime("%-m/%-d (%a)") %></h4>
+          <h4 class="schedule-grid__date">
+            <%= date.strftime("%-m/%-d (%a)") %>
+            <% if grouped_events[date].present? %>
+              <i class="bi bi-pin-fill text-danger ms-2"></i>
+            <% end %>
+          </h4>
 
           <div class="schedule-scroll-inner">
             <div class="schedule-scroll-inner__time-blocks">
@@ -57,7 +62,7 @@
             </div>
           </div>
         </div>
-      <% end %>
+      <% end %> 
     </div>
   </div>
 </turbo-frame>
