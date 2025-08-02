@@ -75,12 +75,13 @@
   }
 
   .right-panel {
+    top: 67px !important;
     display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     margin: 0;
     z-index: 999;
     background: white;
