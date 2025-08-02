@@ -2,27 +2,6 @@
   overflow-x: auto;
   overflow-y: hidden;
   width: 100%;
-
-  @media (max-width: 1100px) {
-    width: calc(100% - 60px);
-  }
-  
-  @media (max-width: 1000px) {
-    width: calc(100% - 100px);
-  }
-  
-  @media (max-width: 900px) {
-    width: calc(100% - 140px);
-  }
-
-  @media (max-width: 800px) {
-    width: calc(100% - 160px);
-  }
-
-  @media (max-width: 768px) {
-    width: calc(100% - 40px);
-    padding-left: 1.5rem;
-  }
 }
 
 .schedule-nav {
@@ -46,12 +25,6 @@
     min-width: max-content;
   }
 
-  &__date {
-    @media (max-width: 1080px) and (min-width: 768px) {
-      font-size: 1rem !important;
-    }
-  }
-
   &__day {
     position: relative;
     max-height: 680px;
@@ -61,24 +34,6 @@
     margin: 0 2px;
     border-radius: 8px;
     background-color: #fdfdfd;
-
-    @media (max-width: 1399px) and (min-width: 1200px) {
-      width: calc(
-        150px + (180 - 150) * ((100vw - 1200px) / (1399 - 1200))
-      );
-    }
-
-    @media (max-width: 1200px) and (min-width: 1000px) {
-      width: calc(
-        125px + (150 - 125) * ((100vw - 1000px) / (1200 - 1000))
-      );
-    }
-
-    @media (max-width: 1000px) and (min-width: 768px) {
-      width: calc(
-        100px + (125 - 100) * ((100vw - 768px) / (1000 - 768))
-      );
-    }
   }
 
   &__block {
@@ -147,5 +102,146 @@
   .event-title,
   .event-time {
     margin: 0;
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .schedule-grid {
+    &__day {
+      width: calc(
+        150px + (180 - 150) * ((100vw - 1200px) / (1399 - 1200))
+      );
+    }
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1000px) {
+  .schedule-grid {
+    &__day {
+      width: calc(
+        125px + (150 - 125) * ((100vw - 1000px) / (1200 - 1000))
+      );
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .schedule {
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .schedule-grid {
+    &__date {
+      font-size: 1rem !important;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .schedule {
+    width: calc(100% - 100px);
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 768px) {
+  .schedule-grid {
+    &__day {
+      width: calc(
+        100px + (125 - 100) * ((100vw - 768px) / (1000 - 768))
+      );
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .schedule {
+    width: calc(100% - 140px);
+  }
+}
+
+@media (max-width: 800px) {
+  .schedule {
+    width: calc(100% - 160px);
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule {
+    width: calc(100% - 40px);
+    padding-left: 1.5rem;
+  }
+
+  .schedule-grid {
+    &__container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      gap: 0;
+      padding: 0.5rem;
+      width: 100%;
+      min-width: max-content;
+      box-sizing: border-box;
+    }
+
+    &__day {
+      width: 125px;
+    }
+  }
+}
+
+@media (max-width: 730px) {
+  .schedule-grid {
+    &__day {
+      width: 120px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .schedule-grid {
+    &__day {
+      width: 110px;
+    }
+
+    &__date {
+      font-size: 1rem !important;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .schedule-grid {
+    &__day {
+      width: 100px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .schedule-grid {
+    &__day {
+      width: 90px;
+    }
+
+    &__date {
+      font-size: 0.8rem !important;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .schedule-nav {
+    gap: 0 !important;
+  }
+}
+
+
+@media (max-width: 390px) {
+  .schedule-nav {
+    &__button {
+      padding: 0;
+    }
   }
 }
