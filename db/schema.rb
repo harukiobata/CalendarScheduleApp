@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_08_074525) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_10_104415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_08_074525) do
     t.integer "granularity_minutes", default: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.time "display_start_time"
+    t.time "display_end_time"
+    t.boolean "timerex_enabled", default: true, null: false
     t.index ["user_id"], name: "index_active_times_on_user_id"
   end
 

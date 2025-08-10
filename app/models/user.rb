@@ -27,7 +27,10 @@ class User < ApplicationRecord
         day_of_week: dow,
         start_time: "00:00",
         end_time: "23:59",
-        granularity_minutes: 30
+        display_start_time: "00:00",
+        display_end_time: "23:59",
+        granularity_minutes: 30,
+        timerex_enabled: true
       )
     end
   end

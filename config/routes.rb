@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   get "schedules", to: "schedules#index", as: :schedule
   get "home/index"
   root "home#index"
+  resources :bookings do
+    collection do
+      get :schedule
+    end
+  end
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
