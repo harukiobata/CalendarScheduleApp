@@ -29,15 +29,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_10_104415) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.string "email"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.string "status"
+    t.bigint "owner_id", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_bookings_on_user_id"
+    t.index ["owner_id"], name: "index_bookings_on_owner_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -68,6 +68,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_10_104415) do
   end
 
   add_foreign_key "active_times", "users"
-  add_foreign_key "bookings", "users"
+  add_foreign_key "bookings", "users", column: "owner_id"
   add_foreign_key "events", "users"
 end
