@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root "home#index"
   resources :bookings do
     collection do
-      get :schedule
+      get 'schedule'
+    end
+    member do
+      get :confirmation
     end
   end
   devise_for :users, controllers: {
