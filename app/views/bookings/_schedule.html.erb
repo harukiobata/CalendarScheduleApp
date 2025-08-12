@@ -1,0 +1,38 @@
+<div class="schedule-container">
+  <div class="schedule-nav mb-3 d-flex justify-content-between">
+    <%= link_to "← 前週", schedule_bookings_path(owner_id: owner.id, base_date: (dates.first - 7.days)), data: { turbo_frame: "schedule_frame" }, class: "btn btn-outline-primary" %>
+    <%= link_to "翌週 →", schedule_bookings_path(owner_id: owner.id, base_date: (dates.first + 7.days)), data: { turbo_frame: "schedule_frame" }, class: "btn btn-outline-primary" %>
+  </div>
+
+  <div class="schedule-week d-flex gap-2 overflow-auto">
+    <% dates.each do |date| %>
+      <% dow = date.wday %>
+      <% active_time = active_times.find { |at| at.day_of_week == dow } %>
+
+      <div class="schedule-day border rounded p-2 d-flex flex-column" style="min-width:120px;">
+        <div class="date-header text-center fw-bold mb-2">
+          <%= date.strftime("%a %m/%d") %>
+        </div>
+
+        <div class="schedule-day__slots flex-grow-1">
+          <% if active_time && active_time.timerex_enabled %>
+            <% build_time_slots(active_time).each do |slot_start, slot_end| %>
+              <% booked = booking_exists?(bookings, date, slot_start, slot_end) %>
+
+              <% if booked %>
+                <div class="time-slot booked"></div>
+              <% else %>
+                <%= link_to "", new_booking_path(owner_id: owner.id, start_time: slot_start, end_time: slot_end),
+                            data: { turbo_frame: "booking_frame" },
+                            class: "time-slot available" %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <div class="time-slot inactive w-100 h-100"></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
