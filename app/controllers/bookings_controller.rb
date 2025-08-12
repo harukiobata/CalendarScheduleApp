@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_owner, only: [:schedule, :new, :create, :confirmation]
-  before_action :authenticate_user!, only: [:index]
+  before_action :set_owner, only: [ :schedule, :new, :create, :confirmation ]
+  before_action :authenticate_user!, only: [ :index ]
 
   def index
     @bookings = current_user.owned_bookings.order(start_time: :asc)
@@ -80,4 +80,3 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:name, :email, :start_time, :end_time, :memo)
   end
 end
-

@@ -3,7 +3,7 @@ module BookingsHelper
     ranges = active_times.map do |at|
       start_min = at.display_start_time.hour * 60 + at.display_start_time.min
       end_min = at.display_end_time.hour * 60 + at.display_end_time.min
-      [start_min, end_min]
+      [ start_min, end_min ]
     end
 
     start_min = ranges.map(&:first).min
@@ -11,7 +11,7 @@ module BookingsHelper
 
     start_time = Time.zone.parse(format("%02d:%02d", start_min / 60, start_min % 60))
     end_time = Time.zone.parse(format("%02d:%02d", end_min / 60, end_min % 60))
-    [start_time, end_time]
+    [ start_time, end_time ]
   end
 
   def build_time_slots(active_time)
@@ -24,8 +24,8 @@ module BookingsHelper
 
     current_start = start_time
     while current_start < end_time
-      current_end = [current_start + step, end_time].min
-      slots << [current_start, current_end]
+      current_end = [ current_start + step, end_time ].min
+      slots << [ current_start, current_end ]
       current_start = current_end
     end
 
