@@ -22,9 +22,15 @@
               <% if booked %>
                 <div class="time-slot booked"></div>
               <% else %>
-                <%= link_to "", new_booking_path(owner_id: owner.id, start_time: slot_start, end_time: slot_end),
+                <% start_time_full = Time.zone.local(date.year, date.month, date.day, slot_start.hour, slot_start.min) %>
+                <% end_time_full   = Time.zone.local(date.year, date.month, date.day, slot_end.hour, slot_end.min) %>
+                <%= link_to new_booking_path(owner_id: owner.id, start_time: start_time_full, end_time: end_time_full),
                             data: { turbo_frame: "booking_frame" },
-                            class: "time-slot available" %>
+                            class: "time-slot available" do %>
+                  <span>
+                    <%= start_time_full.strftime("%H:%M") %>~<%= end_time_full.strftime("%H:%M") %>
+                  </span>
+                <% end %>
               <% end %>
             <% end %>
           <% else %>

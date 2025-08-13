@@ -1,12 +1,6 @@
 <turbo-frame id="booking_frame">
   <h2><%= @owner.username %> さんのご予約ページへようこそ</h2>
   <p>以下のスケジュールからご希望の日時を選んでください。</p>
-  <div class="steps">
-    <ul class="steps-list">
-      <li class="step <%= 'step--active' if @current_step == 1 %>">Step 1: 日時選択</li>
-      <li class="step <%= 'step--active' if @current_step == 2 %>">Step 2: 情報入力</li>
-      <li class="step <%= 'step--active' if @current_step == 3 %>">Step 3: 確認</li>
-    </ul>
-  </div>
+  <%= render partial: "bookings/steps", locals: { current_step: @current_step } %>
   <%= render partial: "bookings/schedule", locals: { active_times: @active_times, events: @events, bookings: @bookings, owner: @owner, dates: (@base_date..@base_date+6.days).to_a } %>
 </turbo-frame>
