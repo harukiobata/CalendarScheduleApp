@@ -17,9 +17,9 @@
         <div class="schedule-day__slots flex-grow-1">
           <% if active_time && active_time.timerex_enabled %>
             <% build_time_slots(active_time).each do |slot_start, slot_end| %>
-              <% booked = booking_exists?(bookings, date, slot_start, slot_end) %>
+              <% booked_or_event = booking_or_event_exists?(bookings, events, date, slot_start, slot_end) %>
 
-              <% if booked %>
+              <% if booked_or_event %>
                 <div class="time-slot booked"></div>
               <% else %>
                 <% start_time_full = Time.zone.local(date.year, date.month, date.day, slot_start.hour, slot_start.min) %>

@@ -17,9 +17,10 @@ module BookingsHelper
   def build_time_slots(active_time)
     return [] unless active_time
 
+    start_time = active_time.display_start_time || active_time.start_time
+    end_time   = active_time.display_end_time   || active_time.end_time
+
     slots = []
-    start_time = active_time.start_time
-    end_time   = active_time.end_time
     step       = active_time.granularity_minutes.minutes
 
     current_start = start_time
@@ -32,14 +33,11 @@ module BookingsHelper
     slots
   end
 
-  def booking_exists?(bookings, date, slot_start, slot_end)
-    bookings.any? do |booking|
-      booking_start = booking.start_time
-      booking_end = booking.end_time
+  def booking_or_event_exists?(bookings, events, date, slot_start, slot_end)
+    slot_start_full = Time.zone.local(date.year, date.month, date.day, slot_start.hour, slot_start.min)
+    slot_end_full   = Time.zone.local(date.year, date.month, date.day, slot_end.hour, slot_end.min)
 
-      booking_start.to_date == date &&
-        booking_start < slot_end &&
-        booking_end > slot_start
-    end
+    overlaps = ->(record) { (record.start_time < slot_end_full) && (record.end_time > slot_start_full) }
+    bookings.any?(&overlaps) || events.any?(&overlaps)
   end
 end

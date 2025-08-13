@@ -34,6 +34,7 @@ class BookingsController < ApplicationController
     end
 
     respond_to do |format|
+      format.html
       format.turbo_stream do
         render partial: "bookings/form", locals: { booking: @booking, owner: @owner }
       end
@@ -73,7 +74,8 @@ class BookingsController < ApplicationController
   private
 
   def set_owner
-    @owner = User.find(params[:owner_id])
+    owner_id = params[:owner_id] || params.dig(:booking, :owner_id)
+    @owner = User.find(owner_id)
   end
 
   def booking_params

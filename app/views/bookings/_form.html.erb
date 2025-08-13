@@ -1,0 +1,32 @@
+<%= form_with(model: booking, url: bookings_path, data: { turbo_frame: "booking_frame" }) do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "お名前" %>
+    <%= f.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :memo, "メッセージ" %>
+    <%= f.text_area :memo, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :owner_id, value: owner.id %>
+  <%= f.hidden_field :start_time, value: booking.start_time %>
+  <%= f.hidden_field :end_time, value: booking.end_time %>
+
+  <div class="mb-3">
+    <p>予約日時: 
+      <%= booking.start_time.strftime("%Y年%m月%d日 %H:%M") %> 〜 
+      <%= booking.end_time.strftime("%H:%M") %>
+    </p>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= f.submit "予約を確定する", class: "btn btn-primary" %>
+    <%= link_to "戻る", :back, class: "btn btn-secondary", data: { turbo_frame: "_top" } %>
+  </div>
+<% end %>
