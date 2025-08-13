@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :active_times, only: [ :index, :update ] do
     collection do
       post :update_granularity
+      patch :update_all
     end
   end
   resources :events do

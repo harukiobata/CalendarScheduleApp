@@ -10,12 +10,17 @@ class ActiveTimesController < ApplicationController
   end
 
   def update
-    if @active_time.update(active_time_params)
-      redirect_to active_time_path, notice: "活動時間を更新しました"
+    if params[:apply_to_all] == "1"
+      current_user.active_times.update_all(active_time_params.to_h)
+      redirect_to active_times_path, notice: "すべての曜日の設定を更新しました"
     else
-      @editing_active_time = @active_time
-      flash.now[:alert] = "更新に失敗しました"
-      render :index, status: :unprocessable_entity
+      if @active_time.update(active_time_params)
+        redirect_to active_time_path, notice: "活動時間を更新しました"
+      else
+        @editing_active_time = @active_time
+        flash.now[:alert] = "更新に失敗しました"
+        render :index, status: :unprocessable_entity
+      end
     end
   end
 
@@ -36,6 +41,6 @@ class ActiveTimesController < ApplicationController
   end
 
   def active_time_params
-    params.require(:active_time).permit(:day_of_week, :start_time, :end_time, :granularity_minutes)
+    params.require(:active_time).permit(:day_of_week, :start_time, :end_time, :display_start_time, :display_end_time, :timerex_enabled, :granularity_minutes)
   end
 end

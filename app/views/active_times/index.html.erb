@@ -29,6 +29,35 @@
           <%= render 'shared/field_error', resource: @editing_active_time, field_name: :end_time %>
         </div>
 
+        <div class="ActiveTime__form-group mb-3">
+          <%= f.label :display_start_time, '予定予約機能の表示開始時間', class: "form-label" %>
+          <%= f.time_field :display_start_time, class: "form-control" %>
+          <div class="form-text text-muted">
+            活動時間よりも開始時間を前に設定できません
+          </div>
+        </div>
+
+        <div class="ActiveTime__form-group mb-3">
+          <%= f.label :display_end_time, '予定予約機能の表示終了時間', class: "form-label" %>
+          <%= f.time_field :display_end_time, class: "form-control" %>
+          <div class="form-text text-muted">
+            活動時間よりも終了時間を後に設定できません
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <%= f.check_box :timerex_enabled, class: "form-check-input" %>
+          <%= f.label :timerex_enabled, '予定予約機能を有効にする', class: "form-check-label" %>
+          <div class="form-text text-muted">
+            有効にすると、予約機能を使用できます。
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <%= check_box_tag :apply_to_all, "1", false, class: "form-check-input" %>
+          <%= label_tag :apply_to_all, 'この設定を全曜日に適用する', class: "form-check-label" %>
+        </div>
+
         <div class="ActiveTime__submit text-end">
           <%= f.submit "設定を更新する", class: "btn btn-primary" %>
         </div>
