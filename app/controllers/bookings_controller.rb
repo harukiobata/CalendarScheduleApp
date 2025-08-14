@@ -69,6 +69,8 @@ class BookingsController < ApplicationController
   def confirmation
     @booking = @owner.owned_bookings.find(params[:id])
     @current_step = 3
+
+    BookingMailer.with(booking: @booking).confirmation_email.deliver_later
   end
 
   private
