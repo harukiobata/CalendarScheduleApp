@@ -1,6 +1,6 @@
 class MailTemplatesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_mail_template, only: [:edit, :update]
+  before_action :set_mail_template, only: [ :edit, :update ]
 
   def index
     @mail_templates = current_user.mail_templates
@@ -27,4 +27,3 @@ class MailTemplatesController < ApplicationController
     params.require(:mail_template).permit(:subject, :body)
   end
 end
-
