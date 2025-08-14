@@ -12,7 +12,7 @@
     <div class="app-header__menu" data-menu-target="menu">
       <% if user_signed_in? %>
         <%= link_to "活動時間を設定", active_times_path, class: "app-header__link" %>
-        <%= link_to "Timerex", schedule_bookings_path(owner_id: current_user.id), data: { turbo: false }, class: "app-header__link" %>
+        <%= link_to "予定予約機能", schedule_bookings_path(owner_id: current_user.id), data: { turbo: false }, class: "app-header__link" %>
         <div data-controller="dropdown" class="dropdown app-header__dropdown">
           <button class="btn btn-outline-primary dropdown-toggle app-header__user-btn" type="button" id="userMenuButton" data-action="click->dropdown#toggle" aria-expanded="false">
             <i class="bi bi-person-circle"></i><%= current_user.username %>
