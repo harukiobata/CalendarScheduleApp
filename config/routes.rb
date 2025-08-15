@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :confirmation
     end
   end
+  resources :mail_templates
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
@@ -27,6 +28,9 @@ Rails.application.routes.draw do
     collection do
       get "new/:date", to: "events#new", as: "new_with_date"
     end
+  end
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

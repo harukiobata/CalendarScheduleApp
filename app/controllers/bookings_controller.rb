@@ -44,6 +44,8 @@ class BookingsController < ApplicationController
   def create
     @booking = @owner.owned_bookings.new(booking_params)
     if @booking.save
+      BookingMailer.with(booking: @booking).confirmation_email.deliver_later
+
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
@@ -69,8 +71,6 @@ class BookingsController < ApplicationController
   def confirmation
     @booking = @owner.owned_bookings.find(params[:id])
     @current_step = 3
-
-    BookingMailer.with(booking: @booking).confirmation_email.deliver_later
   end
 
   private
