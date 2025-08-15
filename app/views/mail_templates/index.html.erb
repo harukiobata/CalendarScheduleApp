@@ -1,0 +1,13 @@
+<h1>メールテンプレート一覧</h1>
+<p class="text-muted">
+  ここでは自動返信メールの件名や本文を編集できます。<br>
+  本文中では以下のコードを使って予約情報を埋め込めます。
+</p>
+
+<%= render "available_codes" %>
+
+<% @mail_templates.each do |template| %>
+  <p>
+    <%= link_to "編集", edit_mail_template_path(template) %>
+  </p>
+<% end %>

@@ -8,6 +8,7 @@
       <div class="tab-navigation d-flex gap-2">
         <%= link_to "作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
         <%= link_to "一覧", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+        <%= link_to "予約一覧", bookings_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
       </div>
 
       <div class="event-form-panel">

@@ -1,0 +1,26 @@
+<turbo-frame id="event_panel">
+  <h3>予約一覧</h3>
+
+  <% if @bookings.any? %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>開始時間</th>
+          <th>終了時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.name %>様</td>
+            <td><%= l(booking.start_time, format: :short) %></td>
+            <td><%= l(booking.end_time, format: :short) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>予約はまだありません。</p>
+  <% end %>
+</turbo-frame>
