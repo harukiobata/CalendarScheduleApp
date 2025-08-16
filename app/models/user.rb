@@ -35,4 +35,22 @@ class User < ApplicationRecord
       )
     end
   end
+
+  def ensure_confirmation_template_exists
+    mail_templates.find_or_create_by!(name: "confirmation_email") do |template|
+      template.subject = "【予約確認】ご予約ありがとうございます"
+      template.body = <<~TEXT
+        <%= @booking.name %> 様
+
+        ご予約ありがとうございます。
+        以下の内容で承りました。
+
+        開始: <%= @booking.start_time.strftime('%Y年%m月%d日 %H:%M') %>
+        終了: <%= @booking.end_time.strftime('%Y年%m月%d日 %H:%M') %>
+
+        ---
+        このメールは自動送信されています。
+      TEXT
+    end
+  end
 end
