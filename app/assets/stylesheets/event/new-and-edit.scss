@@ -38,14 +38,6 @@
   }
 }
 
-.events-index {
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  background-color: #fff;
-}
-
 @media (min-width: 768px) and (max-width: 1400px) {
   .simple-calendar {
     max-width: calc(320px + (90 * ((100vw - 768px) / 632)));

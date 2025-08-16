@@ -80,3 +80,11 @@
     background-color: #ffe6e6;
   }
 }
+
+.events-index {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}

@@ -1,0 +1,61 @@
+.booking-form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  max-width: 500px;
+  margin: 0 auto;
+
+  &__group {
+    margin-bottom: 1.25rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #374151;
+  }
+
+  &__input,
+  &__textarea {
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+
+    &:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+  }
+
+  &__textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  &__date {
+    background: #f9fafb;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+
+    strong {
+      color: #111827;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .btn {
+      border-radius: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+    }
+  }
+}
