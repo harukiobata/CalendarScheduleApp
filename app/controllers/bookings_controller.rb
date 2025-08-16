@@ -1,9 +1,13 @@
 class BookingsController < ApplicationController
   before_action :set_owner, only: [ :schedule, :new, :create, :confirmation ]
-  before_action :authenticate_user!, only: [ :index ]
+  before_action :authenticate_user!, only: [ :index, :index ]
 
   def index
     @bookings = current_user.owned_bookings.order(start_time: :asc)
+  end
+
+  def show
+    @booking = current_user.owned_bookings.find(params[:id])
   end
 
   def schedule
@@ -45,13 +49,14 @@ class BookingsController < ApplicationController
     @booking = @owner.owned_bookings.new(booking_params)
     if @booking.save
       BookingMailer.with(booking: @booking).confirmation_email.deliver_later
+      @current_step = 3
 
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "booking_frame",
             partial: "bookings/confirmation",
-            locals: { booking: @booking }
+            locals: { booking: @booking, owner: @owner, current_step: @current_step  }
           )
         end
       end
@@ -69,8 +74,6 @@ class BookingsController < ApplicationController
   end
 
   def confirmation
-    @booking = @owner.owned_bookings.find(params[:id])
-    @current_step = 3
   end
 
   private
