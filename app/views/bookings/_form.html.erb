@@ -1,32 +1,34 @@
-<%= form_with(model: booking, url: bookings_path, data: { turbo_frame: "booking_frame" }) do |f| %>
-  <div class="mb-3">
-    <%= f.label :name, "お名前" %>
-    <%= f.text_field :name, class: "form-control", required: true %>
+<%= form_with(model: booking, url: bookings_path, data: { turbo_frame: "booking_frame" }, class: "booking-form") do |f| %>
+  <div class="booking-form__group">
+    <%= f.label :name, "お名前", class: "booking-form__label" %>
+    <%= f.text_field :name, class: "booking-form__input form-control", required: true %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, class: "form-control", required: true %>
+  <div class="booking-form__group">
+    <%= f.label :email, "メールアドレス", class: "booking-form__label" %>
+    <%= f.email_field :email, class: "booking-form__input form-control", required: true %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :memo, "メッセージ" %>
-    <%= f.text_area :memo, class: "form-control" %>
+  <div class="booking-form__group">
+    <%= f.label :memo, "メッセージ", class: "booking-form__label" %>
+    <%= f.text_area :memo, class: "booking-form__textarea form-control" %>
   </div>
 
   <%= f.hidden_field :owner_id, value: owner.id %>
   <%= f.hidden_field :start_time, value: booking.start_time %>
   <%= f.hidden_field :end_time, value: booking.end_time %>
 
-  <div class="mb-3">
-    <p>予約日時: 
+  <div class="booking-form__date">
+    <p>
+      <strong>予約日時:</strong>
       <%= booking.start_time.strftime("%Y年%m月%d日 %H:%M") %> 〜 
       <%= booking.end_time.strftime("%H:%M") %>
     </p>
   </div>
 
-  <div class="d-flex justify-content-between">
+  <div class="booking-form__actions">
     <%= f.submit "予約を確定する", class: "btn btn-primary" %>
     <%= link_to "戻る", :back, class: "btn btn-secondary", data: { turbo_frame: "_top" } %>
   </div>
 <% end %>
+
