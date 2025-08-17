@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
       @active_times = current_user.active_times.index_by(&:day_of_week)
     else
       @grouped_events = {}
+      @grouped_bookings = {} 
       @active_times = fallback_times_hash
     end
     @date_active_times = @dates.index_with { |date| @active_times[date.wday] }
