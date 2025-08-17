@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
         .where(start_time: @dates.first.beginning_of_day..@dates.last.end_of_day)
         .order(:start_time)
         .group_by { |event| event.start_time.to_date }
+      @grouped_bookings = current_user.owned_bookings
+        .where(start_time: @dates.first.beginning_of_day..@dates.last.end_of_day)
+        .order(:start_time)
+        .group_by { |booking| booking.start_time.to_date }
       @active_times = current_user.active_times.index_by(&:day_of_week)
     else
       @grouped_events = {}

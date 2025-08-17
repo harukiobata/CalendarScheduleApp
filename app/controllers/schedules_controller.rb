@@ -11,6 +11,7 @@ class SchedulesController < ApplicationController
             base_date: @base_date,
             dates: @dates,
             grouped_events: @grouped_events,
+            grouped_bookings: @grouped_bookings,
             date_active_times: @date_active_times
           }
         )

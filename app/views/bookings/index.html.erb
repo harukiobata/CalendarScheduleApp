@@ -14,8 +14,8 @@
         <% @bookings.each do |booking| %>
           <tr>
             <td><%= link_to "#{booking.name}様",booking_path(booking),data: { turbo_frame: "event_panel" } %></td>
-            <td><%= l(booking.start_time, format: :short) %></td>
-            <td><%= l(booking.end_time, format: :short) %></td>
+            <td><%= link_to booking.start_time.strftime("%-m/%-d %H:%M"),schedule_path(date: booking.start_time.to_date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" }, class: "booking-link" %></td>
+            <td><%= link_to booking.end_time.strftime("%-m/%-d %H:%M"),schedule_path(date: booking.end_time.to_date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" }, class: "booking-link" %></td>
           </tr>
         <% end %>
       </tbody>
