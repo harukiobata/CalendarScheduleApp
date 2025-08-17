@@ -99,9 +99,36 @@
   padding: 0.5rem;
   box-sizing: border-box;
 
-  .event-title,
+  .event-title {
+    font-weight: bold;
+  }
+
   .event-time {
     margin: 0;
+  }
+}
+
+.booking-block {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 123, 255, 1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  padding: 2px 4px;
+  color: #fff;
+  font-size: 0.7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  box-sizing: border-box;
+
+  .booking-title {
+    font-weight: bold;
+  }
+
+  .booking-time {
+    font-size: 0.75rem;
   }
 }
 
