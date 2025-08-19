@@ -15,15 +15,16 @@ Rails.application.configure do
     policy.frame_src   :self, "https://source.zoom.us", "https://zoom.us"
     policy.connect_src :self, "https://source.zoom.us", "https://zoom.us"
     policy.img_src :self, :https, "https://source.zoom.us", "https://zoom.us"
-#     # Specify URI for violation reports
+
+    # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
-#
-#   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
+
+  # Generate session nonces for permitted importmap, inline scripts, and inline styles.
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src style-src)
+  config.content_security_policy_nonce_directives = %w[script-src style-src]
   config.content_security_policy_report_only = Rails.env.development?
-#
-#   # Report violations without enforcing the policy.
-#   # config.content_security_policy_report_only = true
+
+  # Report violations without enforcing the policy.
+  # config.content_security_policy_report_only = true
 end
