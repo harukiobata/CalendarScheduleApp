@@ -2,7 +2,6 @@ class User < ApplicationRecord
   has_many :active_times, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :owned_bookings, class_name: "Booking", foreign_key: "owner_id", dependent: :destroy
-  has_many :mail_templates, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -20,6 +19,14 @@ class User < ApplicationRecord
     end
   end
 
+  def guest?
+    email == "guest@example.com"
+  end
+
+  def zoom_connected?
+    zoom_access_token.present? && zoom_token_expires_at&.future?
+  end
+
   private
 
   def create_default_active_times
@@ -33,24 +40,6 @@ class User < ApplicationRecord
         granularity_minutes: 30,
         timerex_enabled: true
       )
-    end
-  end
-
-  def ensure_confirmation_template_exists
-    mail_templates.find_or_create_by!(name: "confirmation_email") do |template|
-      template.subject = "【予約確認】ご予約ありがとうございます"
-      template.body = <<~TEXT
-        <%= @booking.name %> 様
-
-        ご予約ありがとうございます。
-        以下の内容で承りました。
-
-        開始: <%= @booking.start_time.strftime('%Y年%m月%d日 %H:%M') %>
-        終了: <%= @booking.end_time.strftime('%Y年%m月%d日 %H:%M') %>
-
-        ---
-        このメールは自動送信されています。
-      TEXT
     end
   end
 end
