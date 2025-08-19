@@ -39,6 +39,9 @@ gem "devise-i18n"
 gem "sassc-rails"
 gem "simple_calendar"
 gem "sidekiq"
+gem "zoom_us"
+gem "faraday"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -51,6 +54,7 @@ group :development, :test do
   gem "rubocop", require: false
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -58,7 +62,6 @@ group :development do
   gem "web-console"
   gem "rails-erd"
   gem "letter_opener"
-  gem "letter_opener_web"
 end
 
 group :test do
