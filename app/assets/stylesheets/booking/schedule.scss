@@ -37,6 +37,10 @@
 }
 
 .schedule-nav {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
   .btn {
     border-radius: 9999px;
     font-size: 0.9rem;
@@ -104,5 +108,21 @@
   &.inactive {
     background: #f3f4f6;
     cursor: not-allowed;
+  }
+}
+
+@media (max-width: 937px) {
+  .schedule-week {
+    justify-content: flex-start;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .booking-header {
+    margin-bottom: 0.4rem;
+    &__title {
+      font-size: 1.2rem;
+    }
   }
 }
