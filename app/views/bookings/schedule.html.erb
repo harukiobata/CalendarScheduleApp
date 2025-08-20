@@ -1,0 +1,8 @@
+<turbo-frame id="booking_frame">
+  <div class="booking-header">
+    <h2 class="booking-header__title"><%= @owner.username %> さんのご予約ページへようこそ</h2>
+    <p class="booking-header__subtitle">以下のスケジュールからご希望の日時を選んでください。</p>
+  </div>
+  <%= render partial: "bookings/steps", locals: { current_step: @current_step } %>
+  <%= render partial: "bookings/schedule", locals: { active_times: @active_times, events: @events, bookings: @bookings, owner: @owner, dates: (@base_date..@base_date+6.days).to_a } %>
+</turbo-frame>

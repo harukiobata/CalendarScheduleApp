@@ -6,3 +6,5 @@ ja:
       active_time:
         start_time: "開始時間"
         end_time: "終了時間"
+        display_start_time: "予約開始時間"
+        display_end_time: "予約終了時間"

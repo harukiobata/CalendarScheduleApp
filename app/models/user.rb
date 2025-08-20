@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :active_times, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :owned_bookings, class_name: "Booking", foreign_key: "owner_id", dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,6 +19,14 @@ class User < ApplicationRecord
     end
   end
 
+  def guest?
+    email == "guest@example.com"
+  end
+
+  def zoom_connected?
+    zoom_access_token.present? && zoom_token_expires_at&.future?
+  end
+
   private
 
   def create_default_active_times
@@ -26,7 +35,10 @@ class User < ApplicationRecord
         day_of_week: dow,
         start_time: "00:00",
         end_time: "23:59",
-        granularity_minutes: 30
+        display_start_time: "00:00",
+        display_end_time: "23:59",
+        granularity_minutes: 30,
+        timerex_enabled: true
       )
     end
   end

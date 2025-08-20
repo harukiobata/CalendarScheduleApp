@@ -3,10 +3,11 @@ class ActiveTime < ApplicationRecord
 
   validates :start_time, :end_time, presence: true
   validates :granularity_minutes, inclusion: { in: [ 15, 30, 45, 60 ] }
+  validates :display_start_time, :display_end_time, presence: true
   validate :end_time_before_start_time
   validate :activetime_time_cannot_be_change_after_event
+  validate :display_times_within_active_time
 
-  # ex: 13:30 => 810
   def minutes_since_midnight(time)
     time.hour * 60 + time.min
   end
@@ -54,6 +55,16 @@ class ActiveTime < ApplicationRecord
       active_start <= event_start && active_end >= event_end
     end
       errors.add(:start_time, "又は終了時間は既存のイベントの時間を含むように設定してください")
+    end
+  end
+
+  def display_times_within_active_time
+    if display_start_time.present? && start_time.present? && display_start_time < start_time
+      errors.add(:display_start_time, "は開始時間より後に設定してください")
+    end
+
+    if display_end_time.present? && end_time.present? && display_end_time > end_time
+      errors.add(:display_end_time, "は終了時間より前に設定してください")
     end
   end
 end

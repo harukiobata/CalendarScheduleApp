@@ -1,0 +1,29 @@
+<turbo-frame id="event_panel">
+  <div class="booking-details-card">
+    <div class="card-body">
+      <h4 class="card-title text-center booking-heading">予約の詳細</h4>
+
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">
+          <strong>お名前：</strong> <%= @booking.name %>
+        </li>
+        <li class="list-group-item">
+          <strong>メール：</strong> <%= @booking.email %>
+        </li>
+        <li class="list-group-item">
+          <strong>開始時間：</strong> <%= @booking.start_time.strftime("%Y/%m/%d %H:%M") %>
+        </li>
+        <li class="list-group-item">
+          <strong>終了時間：</strong> <%= @booking.end_time.strftime("%Y/%m/%d %H:%M") %>
+        </li>
+        <li class="list-group-item">
+          <strong>メモ：</strong> <%= simple_format(@booking.memo) %>
+        </li>
+      </ul>
+
+      <div class="text-center">
+        <%= link_to "戻る", :back, data: { turbo_frame: "event_panel" }, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

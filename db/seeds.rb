@@ -72,3 +72,27 @@ Event.create!([
     user: guest_user
   }
 ])
+
+Booking.create!([
+  {
+    owner: user,
+    name: "ゲスト1",
+    email: "guest1@example.com",
+    start_time: Time.zone.parse("2025-08-21 10:00"),
+    end_time: Time.zone.parse("2025-08-21 10:30")
+  },
+  {
+    owner: user,
+    name: "ゲスト2",
+    email: "guest2@example.com",
+    start_time: Time.zone.parse("2025-08-30 10:00"),
+    end_time: Time.zone.parse("2025-08-30 10:30")
+  },
+  {
+    owner: guest_user,
+    name: "ゲスト太郎",
+    email: "guestarou@example.com",
+    start_time: Time.zone.parse("2025-08-30 12:00"),
+    end_time: Time.zone.parse("2025-08-30 12:30")
+  }
+])

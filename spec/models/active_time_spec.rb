@@ -7,6 +7,9 @@ RSpec.describe ActiveTime, type: :model do
       user: user,
       start_time: Time.zone.parse("09:00"),
       end_time: Time.zone.parse("18:00"),
+      display_start_time: Time.zone.parse("12:00"),
+      display_end_time: Time.zone.parse("16:00"),
+      timerex_enabled: true,
       granularity_minutes: 30
     )
   end
@@ -43,7 +46,9 @@ RSpec.describe ActiveTime, type: :model do
       active_time = build(:active_time, user: user,
       day_of_week: 4,
       start_time: Time.zone.parse("11:00"),
-      end_time:   Time.zone.parse("14:00"))
+      end_time:   Time.zone.parse("14:00"),
+      display_start_time: Time.zone.parse("11:00"),
+      display_end_time:   Time.zone.parse("14:00"))
       expect(active_time).to be_valid
     end
 
@@ -54,6 +59,41 @@ RSpec.describe ActiveTime, type: :model do
       end_time:   Time.zone.parse("14:00"))
       expect(active_time).to_not be_valid
       expect(active_time.errors[:start_time]).to include("又は終了時間は既存のイベントの時間を含むように設定してください")
+    end
+
+    it "予定開始時間が開始時間より前なら無効" do
+      active_time = build(:active_time,
+        user: user,
+        start_time: Time.zone.parse("09:00"),
+        end_time:   Time.zone.parse("18:00"),
+        display_start_time: Time.zone.parse("08:00"),
+        display_end_time:   Time.zone.parse("12:00")
+      )
+      expect(active_time).to_not be_valid
+      expect(active_time.errors[:display_start_time]).to include("は開始時間より後に設定してください")
+    end
+
+    it "予定終了時間が終了時間より後なら無効" do
+      active_time = build(:active_time,
+        user: user,
+        start_time: Time.zone.parse("09:00"),
+        end_time:   Time.zone.parse("18:00"),
+        display_start_time: Time.zone.parse("10:00"),
+        display_end_time:   Time.zone.parse("20:00")
+      )
+      expect(active_time).to_not be_valid
+      expect(active_time.errors[:display_end_time]).to include("は終了時間より前に設定してください")
+    end
+
+    it "予定開始時間と予定終了時間が有効範囲なら通る" do
+      active_time = build(:active_time,
+        user: user,
+        start_time: Time.zone.parse("09:00"),
+        end_time:   Time.zone.parse("18:00"),
+        display_start_time: Time.zone.parse("10:00"),
+        display_end_time:   Time.zone.parse("17:00")
+      )
+      expect(active_time).to be_valid
     end
   end
   describe "メソットについて" do

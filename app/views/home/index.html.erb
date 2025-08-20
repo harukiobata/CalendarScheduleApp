@@ -8,6 +8,7 @@
       <div class="tab-navigation d-flex gap-2">
         <%= link_to "作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
         <%= link_to "一覧", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+        <%= link_to "予約", bookings_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
       </div>
 
       <div class="event-form-panel">
@@ -18,7 +19,7 @@
 
   <div class="right-panel schedule-popup" data-schedule-popup-target="panel">
     <div class="home-right-container"> 
-      <%= render template: "schedules/daily_schedule", locals: { base_date: @base_date, dates: @dates, grouped_events: @grouped_events, date_active_times: @date_active_times } %>
+      <%= render template: "schedules/daily_schedule", locals: { base_date: @base_date, dates: @dates, grouped_events: @grouped_events, grouped_bookings: @grouped_bookings, date_active_times: @date_active_times } %>
     </div>
   </div>
 

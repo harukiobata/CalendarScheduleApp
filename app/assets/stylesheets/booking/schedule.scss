@@ -1,0 +1,128 @@
+.booking-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  &__title {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 70%;
+      height: 3px;
+      background: linear-gradient(to right, #0d6efd, #6c63ff);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+  }
+}
+
+.schedule-container {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.schedule-nav {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .btn {
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+.schedule-week {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}  
+
+.schedule-day {
+  flex: 0 0 auto;
+  min-width: 140px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+
+  &__slots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+      
+.date-header {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.time-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  min-height: 32px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.available {
+    background: #e0f2fe;
+    color: #0369a1;
+
+    &:hover {
+      background: #bae6fd;
+    }
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  &.booked {
+    background: #fecaca;
+    color: #b91c1c;
+    cursor: not-allowed;
+  }
+
+  &.inactive {
+    background: #f3f4f6;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 937px) {
+  .schedule-week {
+    justify-content: flex-start;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .booking-header {
+    margin-bottom: 0.4rem;
+    &__title {
+      font-size: 1.2rem;
+    }
+  }
+}

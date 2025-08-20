@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_09_192103) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_17_141227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,7 +22,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_09_192103) do
     t.integer "granularity_minutes", default: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.time "display_start_time"
+    t.time "display_end_time"
+    t.boolean "timerex_enabled", default: true, null: false
     t.index ["user_id"], name: "index_active_times_on_user_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "owner_id", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.text "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_bookings_on_owner_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -48,10 +63,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_09_192103) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "zoom_access_token"
+    t.string "zoom_refresh_token"
+    t.datetime "zoom_token_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_times", "users"
+  add_foreign_key "bookings", "users", column: "owner_id"
   add_foreign_key "events", "users"
 end

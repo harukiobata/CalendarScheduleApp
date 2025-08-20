@@ -59,6 +59,15 @@
                   <div class="event-time"><%= event.start_time.strftime("%H:%M") %> - <%= event.end_time.strftime("%H:%M") %></div>
                 </div>
               <% end %>
+
+              <% (grouped_bookings[date] || []).each do |booking| %>
+                <% top = active_time.minutes_since_midnight(booking.start_time) %>
+                <% height = ((booking.end_time - booking.start_time) / 60).to_i %>
+                <div class="booking-block" style="top: <%= top %>px; height: <%= height %>px;">
+                  <div class="booking-title"><%= booking.name %> さん予約</div>
+                  <div class="booking-time"><%= booking.start_time.strftime("%H:%M") %> - <%= booking.end_time.strftime("%H:%M") %></div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

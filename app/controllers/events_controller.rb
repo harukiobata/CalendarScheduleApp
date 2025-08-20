@@ -85,6 +85,7 @@ class EventsController < ApplicationController
       turbo_stream.replace("daily_schedule", template: "schedules/daily_schedule", locals: { base_date: @base_date,
       dates: @dates,
       grouped_events: @grouped_events,
+      grouped_bookings: @grouped_bookings,
       date_active_times: @date_active_times })
     ]
   end

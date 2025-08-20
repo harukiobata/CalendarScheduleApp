@@ -1,0 +1,33 @@
+<turbo-frame id="booking_frame">
+  <%= render partial: "bookings/steps", locals: { current_step: current_step } %>
+
+  <div class="confirmation">
+    <div class="confirmation__icon text-success">
+      <i class="bi bi-check-circle-fill"></i>
+    </div>
+    <h2 class="confirmation__title">
+      <%= owner.username %> さんへのご予約が完了しました！
+    </h2>
+    <p class="confirmation__message">
+      以下の内容で予約を受け付けました。
+    </p>
+
+    <ul class="confirmation__details">
+      <li>
+        <strong>日時:</strong>
+        <%= booking.start_time.strftime("%Y年%m月%d日 %H:%M") %>
+        〜 <%= booking.end_time.strftime("%H:%M") %>
+      </li>
+      <li>
+        <strong>お名前:</strong> <%= booking.name %>
+      </li>
+      <li>
+        <strong>メール:</strong> <%= booking.email %>
+      </li>
+    </ul>
+
+    <div class="confirmation__actions">
+      <%= link_to "予約ページに戻る", schedule_bookings_path(owner_id: owner.id), class: "btn btn-primary", data: { turbo_frame: "booking_frame" } %>
+    </div>
+  </div>
+</turbo-frame>

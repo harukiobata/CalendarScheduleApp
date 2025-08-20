@@ -1,0 +1,24 @@
+<turbo-frame id="event_panel">
+  <h3 class = "booking-index-heading">予約一覧</h3>
+
+  <div class = "booking-index"> 
+    <table class="table">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>開始時間</th>
+          <th>終了時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= link_to "#{booking.name}様",booking_path(booking),data: { turbo_frame: "event_panel" } %></td>
+            <td><%= link_to booking.start_time.strftime("%-m/%-d %H:%M"),schedule_path(date: booking.start_time.to_date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" }, class: "booking-link" %></td>
+            <td><%= link_to booking.end_time.strftime("%-m/%-d %H:%M"),schedule_path(date: booking.end_time.to_date, format: :turbo_stream), data: { turbo_frame: "daily_schedule" }, class: "booking-link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</turbo-frame>

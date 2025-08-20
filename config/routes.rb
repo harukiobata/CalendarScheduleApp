@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   get "schedules", to: "schedules#index", as: :schedule
   get "home/index"
   root "home#index"
+  resources :bookings do
+    collection do
+      get "schedule"
+    end
+    member do
+      get :confirmation
+    end
+  end
+  resources :mail_templates
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations"
@@ -12,6 +21,7 @@ Rails.application.routes.draw do
   resources :active_times, only: [ :index, :update ] do
     collection do
       post :update_granularity
+      patch :update_all
     end
   end
   resources :events do
@@ -19,6 +29,8 @@ Rails.application.routes.draw do
       get "new/:date", to: "events#new", as: "new_with_date"
     end
   end
+  get "zoom/auth",  to: "zoom#auth",  as: :zoom_auth
+  get "zoom/callback",  to: "zoom#callback",  as: :zoom_callback
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

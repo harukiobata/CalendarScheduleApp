@@ -6,7 +6,10 @@ RSpec.describe Event, type: :model do
   before do
     user.active_times.find_by(day_of_week: 4).update!(
     start_time: Time.zone.parse("08:00"),
-    end_time: Time.zone.parse("20:00")
+    end_time: Time.zone.parse("20:00"),
+    display_start_time: Time.zone.parse("11:00"),
+    display_end_time: Time.zone.parse("11:00"),
+    timerex_enabled: false
   )
   end
 
