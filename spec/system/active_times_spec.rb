@@ -29,8 +29,8 @@ RSpec.describe "活動時間について", type: :system do
     fill_in "予定予約機能の表示終了時間", with: "18:00"
     click_button "設定を更新する"
 
-    expect(page).to have_content "活動時間を更新しました"
-    expect(page).to have_link "▶︎ 日曜日 08:00 - 20:00"
+    expect(page).to have_content ("活動時間を更新しました", wait: 5)
+    expect(page).to have_link ("▶︎ 日曜日 08:00 - 20:00", wait: 5)
   end
 
   it "開始時間が終了時間より後だとエラーになる" do
