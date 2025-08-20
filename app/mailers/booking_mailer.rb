@@ -1,6 +1,4 @@
 class BookingMailer < ApplicationMailer
-  default from: "no-reply@example.com"
-
   def confirmation_email
     @booking = params[:booking]
     zoom_url = nil
