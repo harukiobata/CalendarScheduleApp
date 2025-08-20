@@ -72,7 +72,7 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to_not be_valid
       expect(active_time.errors[:display_start_time]).to include("は開始時間より後に設定してください")
     end
-  
+
     it "予定終了時間が終了時間より後なら無効" do
       active_time = build(:active_time,
         user: user,
@@ -84,7 +84,7 @@ RSpec.describe ActiveTime, type: :model do
       expect(active_time).to_not be_valid
       expect(active_time.errors[:display_end_time]).to include("は終了時間より前に設定してください")
     end
-  
+
     it "予定開始時間と予定終了時間が有効範囲なら通る" do
       active_time = build(:active_time,
         user: user,
