@@ -20,6 +20,11 @@ module BookingsHelper
     start_time = active_time.display_start_time || active_time.start_time
     end_time   = active_time.display_end_time   || active_time.end_time
 
+    if start_time > end_time
+      start_time = start_time.beginning_of_day
+      end_time   = start_time.end_of_day
+    end
+
     slots = []
     step       = active_time.granularity_minutes.minutes
 
