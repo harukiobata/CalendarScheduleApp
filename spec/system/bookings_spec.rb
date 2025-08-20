@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "予約機能について", type: :system, js: true do
   let(:owner) { create(:user) }
+  let!(:active_time) { create(:active_time, user: owner, timerex_enabled: true) }
 
   before do
     visit schedule_bookings_path(owner_id: owner)
