@@ -123,12 +123,14 @@ RSpec.describe "System/event", type: :system, js: true do
       expect(page).to have_content("予定の更新に失敗しました")
     end
   end
-  describe "uactivetimeに依存するcreate,updateについて" do
+  describe "activetimeに依存するcreate,updateについて" do
     before do
       visit active_times_path
       click_link "・ 火曜日 00:00 - 23:59"
       fill_in "開始時間", with: "08:00"
       fill_in "終了時間", with: "20:00"
+      fill_in "予定予約機能の表示開始時間", with: "10:00"
+      fill_in "予定予約機能の表示終了時間", with: "10:30"
       click_button "設定を更新する"
       visit root_path
     end
