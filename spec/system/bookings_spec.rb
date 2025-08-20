@@ -5,6 +5,7 @@ RSpec.describe "予約機能について", type: :system, js: true do
   let!(:active_time) { create(:active_time, user: owner, timerex_enabled: true) }
 
   before do
+    sign_in owner
     visit schedule_bookings_path(owner_id: owner)
   end
 
