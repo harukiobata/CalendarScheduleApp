@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      booking: "予約"
+    attributes:
+      name: "名前"
+      email: "メールアドレス"
+      memo: "メッセージ"

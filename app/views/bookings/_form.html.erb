@@ -2,11 +2,13 @@
   <div class="booking-form__group">
     <%= f.label :name, "お名前", class: "booking-form__label" %>
     <%= f.text_field :name, class: "booking-form__input form-control", required: true %>
+    <%= render 'shared/field_error', resource: booking, field_name: :name %>
   </div>
 
   <div class="booking-form__group">
     <%= f.label :email, "メールアドレス", class: "booking-form__label" %>
     <%= f.email_field :email, class: "booking-form__input form-control", required: true %>
+    <%= render 'shared/field_error', resource: booking, field_name: :email %>
   </div>
 
   <div class="booking-form__group">

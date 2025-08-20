@@ -32,17 +32,13 @@
         <div class="ActiveTime__form-group mb-3">
           <%= f.label :display_start_time, '予定予約機能の表示開始時間', class: "form-label" %>
           <%= f.time_field :display_start_time, class: "form-control" %>
-          <div class="form-text text-muted">
-            活動時間よりも開始時間を前に設定できません
-          </div>
+          <%= render 'shared/field_error', resource: @editing_active_time, field_name: :display_start_time %>
         </div>
 
         <div class="ActiveTime__form-group mb-3">
           <%= f.label :display_end_time, '予定予約機能の表示終了時間', class: "form-label" %>
           <%= f.time_field :display_end_time, class: "form-control" %>
-          <div class="form-text text-muted">
-            活動時間よりも終了時間を後に設定できません
-          </div>
+          <%= render 'shared/field_error', resource: @editing_active_time, field_name: :display_end_time %>
         </div>
 
         <div class="form-check mb-3">
