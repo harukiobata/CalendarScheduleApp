@@ -2,6 +2,22 @@
   <div class="booking-header">
     <h2 class="booking-header__title"><%= @owner.username %> さんのご予約ページへようこそ</h2>
     <p class="booking-header__subtitle">以下のスケジュールからご希望の日時を選んでください。</p>
+    <% if current_user.present? && current_user == @owner %>
+      <p class="booking-header__muted mb-0">
+        下記のURLをコピーして送信すると、他の方も予約できます。
+      </p>
+      <p class="booking-header__muted mb-1 text-muted small">
+        ※Zoom連携をしておくと、自動返信メールにZoom URLを添付できます。
+      </p>
+      <div class="booking-header__link d-flex align-items-center gap-2">
+        <%= link_to schedule_external_bookings_url(@owner.booking_token), class: "flex-grow-1 text-truncate text-primary" do %>
+          <%= schedule_external_bookings_url(@owner.booking_token) %>
+        <% end %>
+      </div>
+      <p class="booking-header__muted mb-2 text-muted small">
+        ※このリンクはあなたにのみ表示されますので他の方には表示されません。
+      </p>
+    <% end %>
   </div>
   <%= render partial: "bookings/steps", locals: { current_step: @current_step } %>
   <%= render partial: "bookings/schedule", locals: { active_times: @active_times, events: @events, bookings: @bookings, owner: @owner, dates: (@base_date..@base_date+6.days).to_a } %>

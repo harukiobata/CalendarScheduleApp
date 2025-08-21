@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   after_create :create_default_active_times
+  before_create :generate_booking_token
 
   def self.guest
     find_or_create_by!(email: "guest@example.com") do |user|
@@ -41,5 +42,9 @@ class User < ApplicationRecord
         timerex_enabled: true
       )
     end
+  end
+
+  def generate_booking_token
+    self.booking_token ||= SecureRandom.urlsafe_base64(12)
   end
 end
