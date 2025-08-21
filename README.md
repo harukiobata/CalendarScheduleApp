@@ -85,6 +85,11 @@ googleカレンダーのスケジュール機能にTimeRexのマス予約機能�
   * 4.予約の確定
     - 入力が完了すると『予約を受け付けました』画面に遷移
     ![予約完了ページ](./public/images/booking-confirmaiton.png)
+  * 5.その他
+    - 活動時間の設定ページで予定予約機能の表示時間を変更できます。
+    ![予約時間の変更](./public/images/activetime-booking.png)
+    - 変更するとその範囲内の予約可能時間のみ表示されます。
+    ![予約枠の変更](./public/images/booking-change.png)
 
 ### ZOOM連携について
   * 1.Zoom連携に飛ぶ
