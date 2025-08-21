@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :bookings do
     collection do
       get "schedule"
+      get "schedule/external/:token", to: "bookings#schedule", as: :schedule_external
     end
     member do
       get :confirmation

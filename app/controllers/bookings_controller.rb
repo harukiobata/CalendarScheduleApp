@@ -48,7 +48,7 @@ class BookingsController < ApplicationController
   def create
     @booking = @owner.owned_bookings.new(booking_params)
     if @booking.save
-      BookingMailer.with(booking: @booking).confirmation_email.deliver_later
+      BookingMailer.with(booking: @booking).confirmation_email.deliver_now
       @current_step = 3
 
       respond_to do |format|
@@ -79,11 +79,19 @@ class BookingsController < ApplicationController
   private
 
   def set_owner
-    owner_id = params[:owner_id] || params.dig(:booking, :owner_id)
-    @owner = User.find(owner_id)
+    if params[:token].present?
+      @owner = User.find_by!(booking_token: params[:token])
+    else
+      owner_id = params[:owner_id] || params.dig(:booking, :owner_id)
+      @owner = User.find(owner_id)
+    end
   end
 
   def booking_params
     params.require(:booking).permit(:name, :email, :start_time, :end_time, :memo)
+  end
+
+  def generate_token
+    self.token ||= SecureRandom.urlsafe_base64(8)
   end
 end

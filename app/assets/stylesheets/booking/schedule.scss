@@ -25,7 +25,20 @@
   &__subtitle {
     font-size: 1rem;
     color: #555;
-    margin: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  &__link {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  &__muted {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 0.8rem;
   }
 }
 
