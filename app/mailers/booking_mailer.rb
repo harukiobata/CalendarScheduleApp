@@ -45,4 +45,3 @@ class BookingMailer < ApplicationMailer
     mail(to: @owner.email, subject: subject, body: body)
   end
 end
-

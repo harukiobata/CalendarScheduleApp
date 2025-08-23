@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_owner, only: [ :schedule, :new, :create, :confirmation ]
   before_action :authenticate_user!, only: [ :index, :index ]
-  before_action :set_booking, only: [:show, :mark_as_read]
+  before_action :set_booking, only: [ :show, :mark_as_read ]
 
   def index
     @bookings = current_user.owned_bookings.order(start_time: :asc)
@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
       BookingMailer.with(booking: @booking).confirmation_email.deliver_now
       BookingMailer.with(booking: @booking).new_booking_notification.deliver_now
       @current_step = 3
-      render_turbo_replace("booking_frame", "bookings/confirmation", booking: @booking, owner: @owner, current_step: @current_step )
+      render_turbo_replace("booking_frame", "bookings/confirmation", booking: @booking, owner: @owner, current_step: @current_step)
     else
       render_turbo_replace("booking_frame", "bookings/form", booking: @booking, owner: @owner)
     end
