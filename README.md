@@ -91,13 +91,19 @@ googleカレンダーのスケジュール機能にTimeRexのマス予約機能�
     - 変更するとその範囲内の予約可能時間のみ表示されます。
     ![予約枠の変更](./public/images/booking-change.png)
 
-### ZOOM連携について
+### ZOOM連携について ※大変申し訳ありませんが現在、開発者の環境のみでこの方法連携できます。
   * 1.Zoom連携に飛ぶ
     - ヘッダーリンクからZoom連携ページに移動
     ![ヘッダー](./public/images/header.png)
   * 2.Zoomと連携
-    - allowをクリックすると連携完了。予約が入るとその方に自動返信でZoomのmeetingURLが送られるよ。
+    - allowをクリックすると連携完了。予約が入るとその方に自動返信でZoomのmeetingURLが送られます。
     ![Zoom連携ページ](./public/images/zoom-api.png)
+  
+  ## 注意 ZOOM連携 Heroku版について お手数ですが以下の内容を実行してください。ローカル環境ではセキュリティーの為、利用できません。
+   * 1.アプリでアカウント作成後、アプリ内のZoom連携ではなく以下のリンクからZoom承認を行なってください。※ゲストアカウントでは連携しないでください
+   [Zoom 承認 URL](https://zoom.us/oauth/authorize?response_type=code&client_id=RohuWWaDQHG7qpm7wQTQA&redirect_uri=https://my-schedule-app-871b9c9f089c.herokuapp.com/zoom/callback)
+   * 2.承認後、アプリ上でZoom連携済みとして動作します
+   * 3.これで予約作成時に自動返信機能でZoomURLが送られます。
 
 ## 8.主な使用技術
 
