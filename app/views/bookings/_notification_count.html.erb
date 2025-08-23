@@ -1,0 +1,7 @@
+<turbo-frame id="notification_badge">
+  <% if unread_count > 0 %>
+    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+      <%= unread_count %>
+    </span>
+  <% end %>
+</turbo-frame>

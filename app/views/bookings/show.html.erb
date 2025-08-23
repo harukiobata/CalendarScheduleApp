@@ -19,10 +19,18 @@
         <li class="list-group-item">
           <strong>メモ：</strong> <%= simple_format(@booking.memo) %>
         </li>
+        <li class="list-group-item">
+          <strong>Zoom ミーティング:</strong> 
+          <% if @booking.zoom_start_url.present? %>
+            <%= link_to "開始する", @booking.zoom_start_url, target: "_blank" %>
+          <% else %>
+            Zoom 未設定
+          <% end %>
+        </li>
       </ul>
 
       <div class="text-center">
-        <%= link_to "戻る", :back, data: { turbo_frame: "event_panel" }, class: "btn btn-outline-secondary" %>
+        <%= button_to "戻る", mark_as_read_booking_path(@booking), method: :patch, data: { turbo_frame: "event_panel" }, class: "btn btn-outline-secondary" %>
       </div>
     </div>
   </div>

@@ -28,6 +28,10 @@ class User < ApplicationRecord
     zoom_access_token.present? && zoom_token_expires_at&.future?
   end
 
+  def unread_bookings
+    owned_bookings.where(read_by_owner: false).order(created_at: :desc)
+  end
+
   private
 
   def create_default_active_times
