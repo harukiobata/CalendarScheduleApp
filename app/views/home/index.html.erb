@@ -8,7 +8,10 @@
       <div class="tab-navigation d-flex gap-2">
         <%= link_to "作成", new_event_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
         <%= link_to "一覧", events_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
-        <%= link_to "予約", bookings_path, data: { turbo_frame: "event_panel" }, class: "tab-link" %>
+        <%= link_to bookings_path, data: { turbo_frame: "event_panel" }, class: "tab-link position-relative" do %>
+          予約
+          <%= render partial: "bookings/notification_count", locals: { unread_count: @unread_count } %>
+        <% end %>
       </div>
 
       <div class="event-form-panel">

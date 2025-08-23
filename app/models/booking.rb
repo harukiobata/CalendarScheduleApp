@@ -6,6 +6,10 @@ class Booking < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
 
+  def zoom_available?
+    zoom_join_url.present? && zoom_start_url.present?
+  end
+
   private
 
   def overlaps_existing?
