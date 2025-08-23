@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
 
   def index
-    @events = current_user ? current_user.events.order(:start_time) : Event.none
+    @events = current_user ? current_user.events.includes(:user).order(:start_time) : Event.none
   end
 
   def new
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
     parse_and_set_times(@event, event_params)
     @start_date = params[:start_date].to_date rescue Time.zone.today
     if @event.update(event_params.except(:start_time, :end_time))
-      @events = current_user.events.order(:start_time)
+      @events = current_user.events.includes(:user).order(:start_time)
       render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を更新しました")
     else
       render_form_with_alert("events/edit", "予定の更新に失敗しました")
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     @start_date = params[:start_date].to_date rescue Time.zone.today
-    @events = current_user.events.order(:start_time)
+    @events = current_user.events.includes(:user).order(:start_time)
     render_schedule_with_flash(event_panel_template: "events/index", notice: "予定を削除しました")
   end
 
