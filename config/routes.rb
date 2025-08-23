@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
     member do
       get :confirmation
+      patch :mark_as_read
     end
   end
   resources :mail_templates
