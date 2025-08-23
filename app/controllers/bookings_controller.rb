@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [ :show, :mark_as_read ]
 
   def index
-    @bookings = current_user.owned_bookings.order(start_time: :asc)
+    @bookings = current_user.owned_bookings.includes(:owner).order(start_time: :asc)
   end
 
   def show
@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
 
   def mark_as_read
     @booking.update(read_by_owner: true) unless @booking.read_by_owner?
-    @bookings = current_user.owned_bookings.order(start_time: :asc)
+    @bookings = current_user.owned_bookings.includes(:owner).order(start_time: :asc)
     render_notification_badge
   end
 
